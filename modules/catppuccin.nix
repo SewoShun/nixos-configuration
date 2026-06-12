@@ -16,6 +16,7 @@ delib.module {
     {
       catppuccin = {
         enable = true;
+        autoEnable = true;
         inherit (cfg) flavor;
       };
     };
@@ -27,6 +28,7 @@ delib.module {
     {
       catppuccin = {
         enable = true;
+        autoEnable = true;
         inherit (cfg) flavor;
         cursors.enable = true;
       };
