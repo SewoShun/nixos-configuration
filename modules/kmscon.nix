@@ -1,4 +1,4 @@
-{ delib, pkgs, ... }:
+{ delib, ... }:
 delib.module {
   name = "services.kmscon";
 
@@ -6,11 +6,6 @@ delib.module {
 
   nixos.ifEnabled.services.kmscon = {
     enable = true;
-    fonts = [
-      {
-        name = "M+1Code Nerd Font";
-        package = pkgs.nerd-fonts."m+";
-      }
-    ];
+    config.font-name = "ZedMono Nerd Font";
   };
 }
