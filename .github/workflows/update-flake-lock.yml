@@ -48,15 +48,15 @@ jobs:
       - name: Build desktop (before update)
         id: old-desktop
         run: |
-          p=$(nix build .#nixosConfigurations.desktop.config.system.build.toplevel \
-            --no-link --print-out-paths)
+          p=$(nix build github:SewoShun/nixos-configuration/main#nixosConfigurations.desktop.config.system.build.toplevel \
+            --no-link --print-out-paths --option post-build-hook "")
           echo "path=$p" >> "$GITHUB_OUTPUT"
 
       - name: Build thinkpad-e14-gen7 (before update)
         id: old-thinkpad
         run: |
-          p=$(nix build .#nixosConfigurations.thinkpad-e14-gen7.config.system.build.toplevel \
-            --no-link --print-out-paths)
+          p=$(nix build github:SewoShun/nixos-configuration/main#nixosConfigurations.thinkpad-e14-gen7.config.system.build.toplevel \
+            --no-link --print-out-paths --option post-build-hook "")
           echo "path=$p" >> "$GITHUB_OUTPUT"
 
       - name: Update flake.lock
@@ -123,6 +123,7 @@ jobs:
         with:
           commit-message: "chore: update flake.lock"
           branch: update/flake-lock
+          base: main
           delete-branch: true
           title: "chore: update flake.lock (${{ steps.datetime.outputs.jst }})"
           body: |
@@ -136,7 +137,7 @@ jobs:
 
       - name: Merge Pull Request
         if: success() && steps.cpr.outputs.pull-request-number != ''
-        run: gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"
+        run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
