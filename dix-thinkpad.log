@@ -1,9 +1,0 @@
-<<< /nix/store/1dnak9vcw98dfg9f8g8gl63d9gr1jy11-nixos-system-nixos-26.11.20260610.9ae611a
->>> /nix/store/ygxcxnsyjmrgg9bfa3dxw2k2v9v8lny2-nixos-system-nixos-26.11.20260610.9ae611a
-
-CHANGED
-[C.] home-configuration-reference-manpage +24.1 KiB
-
-PATHS: 2176 -> 2176 (+17, -17)
-SIZE: 17.7 GiB -> 17.7 GiB
-DIFF: 25.7 KiB
