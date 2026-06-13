@@ -24,7 +24,7 @@ delib.module {
               "0.0.0.0/0"
               "::/0"
             ];
-            persistentKeepalive = 25;
+            persistentKeepalive = 10;
           }
         ];
       };
