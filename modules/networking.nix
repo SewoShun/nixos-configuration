@@ -11,6 +11,5 @@ delib.module {
         wifi.powersave = false;
       };
     };
-    services.resolved.enable = true;
   };
 }
