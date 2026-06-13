@@ -15,6 +15,7 @@ delib.module {
       access-tokens.file = ../secrets/access-tokens.age;
       cachix-auth-token.file = ../secrets/cachix-auth-token.age;
       password.file = ../secrets/password.age;
+      nordvpn-wg-key.file = ../secrets/nordvpn-wg-key.age;
     };
 
     nix.extraOptions = ''

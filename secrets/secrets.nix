@@ -19,4 +19,5 @@ in
   "access-tokens.age".publicKeys = keys;
   "cachix-auth-token.age".publicKeys = keys;
   "password.age".publicKeys = keys;
+  "nordvpn-wg-key.age".publicKeys = keys;
 }
