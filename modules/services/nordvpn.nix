@@ -19,7 +19,7 @@ delib.module {
         peers = [
           {
             publicKey = "SAio0Z0suFlRfmydzPdcn6MamqS7Mq4pSOm2YmJkLSs=";
-            endpoint = "jp862.nordvpn.com:51820";
+            endpoint = "jp786.nordvpn.com:51820";
             allowedIPs = [
               "0.0.0.0/0"
               "::/0"
