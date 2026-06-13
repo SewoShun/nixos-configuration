@@ -14,6 +14,7 @@ delib.module {
       delta.enable = true;
       direnv.enable = true;
       eza.enable = true;
+      fd.enable = true;
       fish.enable = true;
       gh.enable = true;
       git.enable = true;
