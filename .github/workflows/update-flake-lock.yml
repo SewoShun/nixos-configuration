@@ -74,17 +74,46 @@ jobs:
       # Build after flake.lock update (dix comparison target)
       - name: Build desktop (after update)
         id: new-desktop
+        continue-on-error: true
         run: |
-          p=$(nix build .#nixosConfigurations.desktop.config.system.build.toplevel \
-            --no-link --print-out-paths)
-          echo "path=$p" >> "$GITHUB_OUTPUT"
+          nix build .#nixosConfigurations.desktop.config.system.build.toplevel \
+            --no-link --print-out-paths \
+            > /tmp/desktop-out.txt 2>/tmp/desktop-err.txt && EXIT=0 || EXIT=$?
+          echo "exit_code=$EXIT" >> "$GITHUB_OUTPUT"
+          [ "$EXIT" -eq 0 ] && echo "path=$(cat /tmp/desktop-out.txt)" >> "$GITHUB_OUTPUT" || true
 
       - name: Build thinkpad-e14-gen7 (after update)
         id: new-thinkpad
+        continue-on-error: true
         run: |
-          p=$(nix build .#nixosConfigurations.thinkpad-e14-gen7.config.system.build.toplevel \
-            --no-link --print-out-paths)
-          echo "path=$p" >> "$GITHUB_OUTPUT"
+          nix build .#nixosConfigurations.thinkpad-e14-gen7.config.system.build.toplevel \
+            --no-link --print-out-paths \
+            > /tmp/thinkpad-out.txt 2>/tmp/thinkpad-err.txt && EXIT=0 || EXIT=$?
+          echo "exit_code=$EXIT" >> "$GITHUB_OUTPUT"
+          [ "$EXIT" -eq 0 ] && echo "path=$(cat /tmp/thinkpad-out.txt)" >> "$GITHUB_OUTPUT" || true
+
+      - name: Prepare build logs
+        id: build-logs
+        if: always()
+        run: |
+          prepare_log() {
+            local file="$1" varname="$2" warnings_only="$3"
+            [ -f "$file" ] || return
+            if [ "$warnings_only" = "true" ]; then
+              CONTENT=$(grep -E "^warning:" "$file" || true)
+            else
+              CONTENT=$(cat "$file")
+            fi
+            [ -z "$CONTENT" ] && return
+            if [ "${#CONTENT}" -gt 1800 ]; then
+              CONTENT="${CONTENT:0:1800}...(truncated)"
+            fi
+            { echo "${varname}<<EOF"; printf '%s\n' "$CONTENT"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+          }
+          prepare_log /tmp/desktop-err.txt desktop_err false
+          prepare_log /tmp/thinkpad-err.txt thinkpad_err false
+          prepare_log /tmp/desktop-err.txt desktop_warn true
+          prepare_log /tmp/thinkpad-err.txt thinkpad_warn true
 
       - name: Generate dix diff
         id: dix
@@ -136,13 +165,17 @@ jobs:
             ${{ steps.dix.outputs.thinkpad_desc }}
 
       - name: Merge Pull Request
-        if: success() && steps.cpr.outputs.pull-request-number != ''
+        if: >-
+          success() &&
+          steps.new-desktop.outputs.exit_code == '0' &&
+          steps.new-thinkpad.outputs.exit_code == '0' &&
+          steps.cpr.outputs.pull-request-number != ''
         run: gh pr merge --merge "${{ steps.cpr.outputs.pull-request-url}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notify Discord - desktop
-        if: success()
+        if: success() && steps.new-desktop.outputs.exit_code == '0'
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -155,7 +188,7 @@ jobs:
           color: 0x00FF00
 
       - name: Notify Discord - thinkpad-e14-gen7
-        if: success()
+        if: success() && steps.new-thinkpad.outputs.exit_code == '0'
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -166,6 +199,66 @@ jobs:
 
             ${{ steps.dix.outputs.thinkpad_desc }}
           color: 0x00FF00
+
+      - name: Notify Discord - desktop build failure
+        if: always() && steps.new-desktop.outputs.exit_code != '0'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: failure
+          title: "NixOS build failed - desktop"
+          description: |
+            ${{ steps.datetime.outputs.jst }}
+
+            ```
+            ${{ steps.build-logs.outputs.desktop_err }}
+            ```
+          color: 0xFF0000
+
+      - name: Notify Discord - thinkpad build failure
+        if: always() && steps.new-thinkpad.outputs.exit_code != '0'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: failure
+          title: "NixOS build failed - thinkpad-e14-gen7"
+          description: |
+            ${{ steps.datetime.outputs.jst }}
+
+            ```
+            ${{ steps.build-logs.outputs.thinkpad_err }}
+            ```
+          color: 0xFF0000
+
+      - name: Notify Discord - desktop build warning
+        if: always() && steps.new-desktop.outputs.exit_code == '0' && steps.build-logs.outputs.desktop_warn != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: success
+          title: "NixOS build warning - desktop"
+          description: |
+            ${{ steps.datetime.outputs.jst }}
+
+            ```
+            ${{ steps.build-logs.outputs.desktop_warn }}
+            ```
+          color: 0xFFAA00
+
+      - name: Notify Discord - thinkpad build warning
+        if: always() && steps.new-thinkpad.outputs.exit_code == '0' && steps.build-logs.outputs.thinkpad_warn != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: success
+          title: "NixOS build warning - thinkpad-e14-gen7"
+          description: |
+            ${{ steps.datetime.outputs.jst }}
+
+            ```
+            ${{ steps.build-logs.outputs.thinkpad_warn }}
+            ```
+          color: 0xFFAA00
 
       - name: Notify Discord on failure
         if: failure()
