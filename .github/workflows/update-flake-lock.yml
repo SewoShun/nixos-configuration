@@ -137,7 +137,7 @@ jobs:
 
       - name: Merge Pull Request
         if: success() && steps.cpr.outputs.pull-request-number != ''
-        run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pull-request-url}}"
+        run: gh pr merge --merge "${{ steps.cpr.outputs.pull-request-url}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
