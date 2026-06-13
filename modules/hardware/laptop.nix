@@ -15,10 +15,14 @@ delib.module {
     };
 
   nixos.ifEnabled = {
-    services.logind.settings.Login = {
-      HandleLidSwitch = "suspend-then-hibernate";
-      HandlePowerKey = "sleep";
-      HandlePowerKeyLongPress = "hibernate";
+    services = {
+      logind.settings.Login = {
+        HandleLidSwitch = "suspend-then-hibernate";
+        HandlePowerKey = "sleep";
+        HandlePowerKeyLongPress = "hibernate";
+      };
+
+      thermald.enable = true;
     };
   };
 }
