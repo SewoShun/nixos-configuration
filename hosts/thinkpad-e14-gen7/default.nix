@@ -73,5 +73,7 @@ delib.host {
       ];
       resumeDevice = "/dev/disk/by-uuid/769e63fb-d3c5-4819-a5a1-10a2bd0a9cb6";
     };
+
+    services.fprintd.enable = true;
   };
 }

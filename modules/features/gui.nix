@@ -9,8 +9,8 @@ delib.module {
       awww.enable = true;
       dunst.enable = true;
       fcitx5.enable = true;
-      greetd.enable = true;
       kmscon.enable = true;
+      lemurs.enable = true;
       yaskkserv2.enable = true;
     };
 
