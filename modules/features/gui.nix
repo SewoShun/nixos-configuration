@@ -10,7 +10,7 @@ delib.module {
       dunst.enable = true;
       fcitx5.enable = true;
       kmscon.enable = true;
-      lemurs.enable = true;
+      greetd.enable = true;
       yaskkserv2.enable = true;
     };
 
