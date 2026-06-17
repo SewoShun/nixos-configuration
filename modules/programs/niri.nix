@@ -12,7 +12,10 @@ delib.module {
 
   options = delib.singleEnableOption false;
 
-  nixos.ifEnabled.programs.niri.enable = true;
+  nixos.ifEnabled.programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   home.always.imports = [ inputs.niri.homeModules.niri ];
 
@@ -21,6 +24,7 @@ delib.module {
     {
       programs.niri = {
         enable = true;
+        package = pkgs.niri-unstable;
         settings =
           let
             alacritty = lib.getExe homeConfig.programs.alacritty.package;
