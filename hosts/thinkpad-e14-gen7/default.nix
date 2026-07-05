@@ -47,6 +47,7 @@ delib.host {
         nix-enhancement.enable = true;
         cli.enable = true;
         gui.enable = true;
+        ai.enable = true;
       };
 
       services = {
@@ -56,10 +57,6 @@ delib.host {
         openssh.enable = true;
         pipewire.enable = true;
         xremap.enable = true;
-      };
-
-      programs = {
-        claude-code.enable = true;
       };
     };
 

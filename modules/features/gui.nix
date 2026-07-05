@@ -1,4 +1,9 @@
-{ delib, pkgs, ... }:
+{
+  delib,
+  pkgs,
+  inputs,
+  ...
+}:
 delib.module {
   name = "features.gui";
 

@@ -52,14 +52,9 @@ delib.host {
       services = {
         flatpak.enable = true;
         nordvpn.enable = true;
-        ollama.enable = true;
         openssh.enable = true;
         pipewire.enable = true;
         xremap.enable = true;
-      };
-
-      programs = {
-        claude-code.enable = true;
       };
     };
 
