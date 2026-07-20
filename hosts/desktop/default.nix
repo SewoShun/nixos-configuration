@@ -51,7 +51,7 @@ delib.host {
 
       services = {
         flatpak.enable = true;
-        nordvpn.enable = true;
+        # nordvpn.enable = true;
         openssh.enable = true;
         pipewire.enable = true;
         xremap.enable = true;
