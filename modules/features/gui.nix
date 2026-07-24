@@ -32,6 +32,7 @@ delib.module {
 
   home.ifEnabled.home.packages = with pkgs; [
     chromium
+    vivify
     krusader
     slack
     tor-browser
