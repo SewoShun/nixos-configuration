@@ -30,7 +30,7 @@ delib.module {
       USB_EXCLUDE_AUDIO = 1;
       USB_EXCLUDE_PRINTER = 1;
       WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
+      WIFI_PWR_ON_BAT = "off";
       SOUND_POWER_SAVE_ON_AC = 0;
       SOUND_POWER_SAVE_ON_BAT = 1;
       SOUND_POWER_SAVE_CONTROLLER = "Y";
@@ -38,6 +38,8 @@ delib.module {
       RUNTIME_PM_ON_BAT = "auto";
       MEM_SLEEP_ON_AC = "s2idle";
       MEM_SLEEP_ON_BAT = "s2idle";
+
+      RUNTIME_PM_DRIVER_BLACKLIST = "rtw89_8852be";
     };
   };
 }
