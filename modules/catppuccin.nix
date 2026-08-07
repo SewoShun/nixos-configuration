@@ -18,6 +18,7 @@ delib.module {
         enable = true;
         autoEnable = true;
         inherit (cfg) flavor;
+        cache.enable = true;
       };
     };
 
@@ -31,6 +32,7 @@ delib.module {
         autoEnable = true;
         inherit (cfg) flavor;
         cursors.enable = true;
+        cache.enable = true;
       };
     };
 }
