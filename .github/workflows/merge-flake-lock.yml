@@ -1,0 +1,58 @@
+name: Merge flake.lock PR
+
+on:
+  workflow_run:
+    workflows: ["Nix Diff"]
+    types: [completed]
+
+jobs:
+  merge:
+    if: github.event.workflow_run.head_branch == 'update/flake-lock'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Get datetime (JST)
+        id: datetime
+        run: echo "jst=$(TZ='Asia/Tokyo' date '+%Y-%m-%d %H:%M JST')" >> "$GITHUB_OUTPUT"
+
+      - name: Find Pull Request
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --head update/flake-lock --state open --json number --jq '.[0].number // empty')
+          echo "number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: Merge Pull Request
+        if: github.event.workflow_run.conclusion == 'success' && steps.pr.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --merge --repo "${{ github.repository }}" "${{ steps.pr.outputs.number }}"
+
+      - name: Notify Discord on success
+        if: github.event.workflow_run.conclusion == 'success' && steps.pr.outputs.number != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: success
+          title: "NixOS flake.lock updated"
+          description: |
+            ${{ steps.datetime.outputs.jst }}
+
+            See the nix-diff PR comment for package and closure size changes.
+          color: 0x00FF00
+
+      - name: Notify Discord on build failure
+        if: github.event.workflow_run.conclusion != 'success'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: failure
+          title: "NixOS build failed"
+          description: |
+            ${{ steps.datetime.outputs.jst }} - nix-diff workflow failed, PR was not merged.
+            ${{ github.event.workflow_run.html_url }}
+          color: 0xFF0000
