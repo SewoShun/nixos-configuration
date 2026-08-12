@@ -24,6 +24,8 @@
     noctalia-shell.inputs.nixpkgs.follows = "nixpkgs";
     ragenix.url = "github:yaxitech/ragenix";
     ragenix.inputs.nixpkgs.follows = "nixpkgs";
+    sentrux.url = "github:SewoShun/sentrux-nix";
+    sentrux.inputs.nixpkgs.follows = "nixpkgs";
     xremap.url = "github:xremap/nix-flake";
     xremap.inputs.nixpkgs.follows = "nixpkgs";
     yaskkserv2-nix.url = "github:SewoShun/yaskkserv2-nix";

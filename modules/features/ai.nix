@@ -4,6 +4,9 @@
   inputs,
   ...
 }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 delib.module {
   name = "features.ai";
 
@@ -20,11 +23,11 @@ delib.module {
   home.ifEnabled = { myconfig, ... }: {
     home.packages =
       with pkgs;
-      [ ]
+      [ inputs.sentrux.packages.${system}.default ]
       ++ (
         if myconfig.features.gui.enable then
           [
-            inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default
+            inputs.claude-desktop.packages.${system}.default
             libGL
           ]
         else
