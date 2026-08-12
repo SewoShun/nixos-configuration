@@ -7,7 +7,7 @@ delib.module {
   home.ifEnabled.programs.wezterm = {
     enable = true;
     settings = {
-      font = lib.generators.mkLuaInline ''wezterm.font("ZedMono Nerd Font")'';
+      font = lib.generators.mkLuaInline ''wezterm.font("VictorMono Nerd Font")'';
       window_decorations = "NONE";
       hide_mouse_cursor_when_typing = true;
       use_fancy_tab_bar = false;

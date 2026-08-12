@@ -7,5 +7,6 @@ delib.module {
     migu
     nerd-fonts.zed-mono
     nerd-fonts."m+"
+    nerd-fonts.victor-mono
   ];
 }
