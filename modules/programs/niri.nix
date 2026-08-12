@@ -27,9 +27,8 @@ delib.module {
         package = pkgs.niri-unstable;
         settings =
           let
-            alacritty = lib.getExe homeConfig.programs.alacritty.package;
             firefox = lib.getExe homeConfig.programs.firefox.package;
-            zellij = lib.getExe homeConfig.programs.zellij.package;
+            wezterm = lib.getExe homeConfig.programs.wezterm.package;
             noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
             noctalia-call =
               cmd:
@@ -59,7 +58,7 @@ delib.module {
             inherit outputs;
 
             binds = with homeConfig.lib.niri.actions; {
-              "Mod+Return".action = spawn alacritty "--command=${zellij}";
+              "Mod+Return".action = spawn wezterm;
               "Mod+b".action = spawn firefox;
               "Mod+d".action.spawn = noctalia-call "launcher toggle";
               "Mod+Shift+p".action.spawn = noctalia-call "sessionMenu toggle";

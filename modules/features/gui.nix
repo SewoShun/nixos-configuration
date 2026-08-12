@@ -20,13 +20,13 @@ delib.module {
     };
 
     programs = {
-      alacritty.enable = true;
       discord.enable = true;
       firefox.enable = true;
       gamemode.enable = true;
       niri.enable = true;
       noctalia-shell.enable = true;
       steam.enable = true;
+      wezterm.enable = true;
     };
   };
 
