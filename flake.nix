@@ -7,6 +7,8 @@
     denix.inputs.nixpkgs.follows = "nixpkgs";
     denix.inputs.home-manager.follows = "home-manager";
 
+    basalt-launcher.url = "github:MegalithOfficial/basalt-launcher";
+    basalt-launcher.inputs.nixpkgs.follows = "nixpkgs";
     catppuccin.url = "github:catppuccin/nix";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.url = "github:patrickjaja/claude-desktop-extra";
