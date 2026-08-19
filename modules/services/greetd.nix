@@ -21,7 +21,7 @@ delib.module {
         let
           commands = {
             regreet = "${pkgs.lib.getExe pkgs.cage} -s -mlast -- ${pkgs.lib.getExe config.programs.regreet.package}";
-            tuigreet = "${pkgs.lib.getExe pkgs.tuigreet} --time";
+            tuigreet = "${pkgs.lib.getExe pkgs.tuigreet} --time --cmd niri-session";
           };
         in
         {
