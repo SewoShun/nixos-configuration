@@ -23,7 +23,7 @@ delib.module {
   home.ifEnabled = { myconfig, ... }: {
     home.packages =
       with pkgs;
-      [ inputs.sentrux.packages.${system}.default ]
+      [ sentrux ]
       ++ (
         if myconfig.features.gui.enable then
           [
