@@ -11,6 +11,7 @@ delib.module {
     defaultEditor = true;
     settings = {
       editor = {
+        clipboard-provider = "wayland";
         true-color = true;
         bufferline = "multiple";
         color-modes = true;

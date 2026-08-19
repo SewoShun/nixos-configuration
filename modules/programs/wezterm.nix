@@ -7,7 +7,12 @@ delib.module {
   home.ifEnabled.programs.wezterm = {
     enable = true;
     settings = {
-      font = lib.generators.mkLuaInline ''wezterm.font("VictorMono Nerd Font")'';
+      font = lib.generators.mkLuaInline ''
+        wezterm.font{
+          family = "VictorMono Nerd Font",
+          harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+        }
+      '';
       window_decorations = "NONE";
       hide_mouse_cursor_when_typing = true;
       use_fancy_tab_bar = false;
