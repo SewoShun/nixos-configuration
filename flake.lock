@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786664193,
-        "narHash": "sha256-cZP4WDKqpbO4603731e12VA7RREprqoUFmZnNsIcFLE=",
+        "lastModified": 1789120902,
+        "narHash": "sha256-vsJJJHuLfC7S6bl/td7V+NXYTvSGR395eo42gKv+DcI=",
         "owner": "MegalithOfficial",
         "repo": "basalt-launcher",
-        "rev": "00b4f9915def3d201e0a411c3b5453940849c683",
+        "rev": "36b4f165e0bd7a11eec5a6da5d156d5661f8b11a",
         "type": "github"
       },
       "original": {
@@ -72,11 +72,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789051356,
-        "narHash": "sha256-BJyQh9V3y2oVT6z9xkwbqdBznBNtY8Pq2WMYV7fRvZA=",
+        "lastModified": 1789137499,
+        "narHash": "sha256-AQI1Wnz8cnlJmrqY5RsfDYkxCYQOwsfZ1RvLaINZStA=",
         "owner": "patrickjaja",
         "repo": "claude-desktop-extra",
-        "rev": "ce139de76c00aab7a47914b63e7a0b8d1592b7e2",
+        "rev": "e2774c093ea01323585e9c2c2210070a7ed911b1",
         "type": "github"
       },
       "original": {
@@ -322,11 +322,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789047607,
-        "narHash": "sha256-TvkqeCjWyQvQs7jZ/2WcOWF1GMSgKtAP3qrw7eKpp1k=",
+        "lastModified": 1789144075,
+        "narHash": "sha256-zD31BI5PqEdLRCSdtlwlbAOPCdmg6sFW+/fmGRSeG3I=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f7f333f04ff6e2f94f955642a1b4956d4fcd3010",
+        "rev": "61b08afca39cc9afe69a47cdd82fbb305899b106",
         "type": "github"
       },
       "original": {
