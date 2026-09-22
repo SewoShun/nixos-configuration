@@ -30,6 +30,9 @@
     xremap.inputs.nixpkgs.follows = "nixpkgs";
     yaskkserv2-nix.url = "github:SewoShun/yaskkserv2-nix";
     yaskkserv2-nix.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.inputs.home-manager.follows = "home-manager";
   };
 
   outputs =

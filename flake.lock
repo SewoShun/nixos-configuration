@@ -671,7 +671,8 @@
         "noctalia-shell": "noctalia-shell",
         "ragenix": "ragenix",
         "xremap": "xremap",
-        "yaskkserv2-nix": "yaskkserv2-nix"
+        "yaskkserv2-nix": "yaskkserv2-nix",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-overlay": {
@@ -927,6 +928,29 @@
       "original": {
         "owner": "SewoShun",
         "repo": "yaskkserv2-nix",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789962061,
+        "narHash": "sha256-gyzlqZi+R1cq/n/c6vh5Rz10M7QausR/O8v+YGAOyTA=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "1c3a1fcacf97eb3792e9292e3afc0edbfcfa01d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

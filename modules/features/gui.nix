@@ -27,6 +27,7 @@ delib.module {
       noctalia-shell.enable = true;
       steam.enable = true;
       wezterm.enable = true;
+      zen-browser.enable = true;
     };
   };
 
