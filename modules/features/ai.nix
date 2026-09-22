@@ -6,6 +6,19 @@
 }:
 let
   system = pkgs.stdenv.hostPlatform.system;
+
+  claudeDesktopRaw = inputs.claude-desktop.packages.${system}.default.override {
+    electron = pkgs.electron_44;
+  };
+  claudeDesktop = pkgs.symlinkJoin {
+    name = "claude-desktop-extra-fixed";
+    paths = [ claudeDesktopRaw ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/claude-desktop \
+        --set CHROME_DEVEL_SANDBOX "${claudeDesktopRaw}/lib/claude-desktop/chrome-sandbox"
+    '';
+  };
 in
 delib.module {
   name = "features.ai";
@@ -27,7 +40,7 @@ delib.module {
       ++ (
         if myconfig.features.gui.enable then
           [
-            inputs.claude-desktop.packages.${system}.default
+            claudeDesktop
             libGL
           ]
         else
