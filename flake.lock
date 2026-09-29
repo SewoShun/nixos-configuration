@@ -72,11 +72,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790499853,
-        "narHash": "sha256-zWjUmykVaZ7c8zp6bRK93vhlc5ehe083bPU5zzG3r8c=",
+        "lastModified": 1790656664,
+        "narHash": "sha256-rvjEqTvyH/kLoscmL9cUla9luFXTr/E6nnkvZ677XF0=",
         "owner": "patrickjaja",
         "repo": "claude-desktop-extra",
-        "rev": "d5551098ceb87bf4effe8165f02e405a813a49ea",
+        "rev": "8f4de6c68e3fbb00f2be5916580c3fdaa751e7bc",
         "type": "github"
       },
       "original": {
@@ -302,11 +302,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1784822617,
-        "narHash": "sha256-IYDL6Vnf13Sa+wbeXZTAxvdLA4h8Ew5ha0spcJy/Yk0=",
+        "lastModified": 1790649139,
+        "narHash": "sha256-ZjMduEHRsY0H8OHJ5oiF/AcxOBhIiCBwo7D+g1yYwKc=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "079a789e8cb08ead67f19e1971a1b7438b37354b",
+        "rev": "ba40e547426b0f9896c8bdc699a4ab11f2b37dbc",
         "type": "github"
       },
       "original": {
