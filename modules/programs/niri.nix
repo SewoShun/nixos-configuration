@@ -27,7 +27,7 @@ delib.module {
         package = pkgs.niri-unstable;
         settings =
           let
-            firefox = lib.getExe homeConfig.programs.firefox.package;
+            zen-browser = lib.getExe homeConfig.programs.zen-browser.package;
             wezterm = lib.getExe homeConfig.programs.wezterm.package;
             noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
             noctalia-call =
@@ -59,7 +59,7 @@ delib.module {
 
             binds = with homeConfig.lib.niri.actions; {
               "Mod+Return".action = spawn wezterm;
-              "Mod+b".action = spawn firefox;
+              "Mod+b".action = spawn zen-browser;
               "Mod+d".action.spawn = noctalia-call "launcher toggle";
               "Mod+Shift+p".action.spawn = noctalia-call "sessionMenu toggle";
               "Mod+Comma".action.spawn = noctalia-call "settings toggle";
