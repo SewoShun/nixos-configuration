@@ -5,7 +5,7 @@ delib.module {
   options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
-    boot.initrd.availableKernelModules = [
+    boot.kernelModules = [
       "nvidia"
       "nvidia_modeset"
       "nvidia_uvm"
