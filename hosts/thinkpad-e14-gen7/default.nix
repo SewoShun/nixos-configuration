@@ -29,6 +29,7 @@ delib.host {
       swap.enable = true;
 
       boot = {
+        plymouth.enable = true;
         zswap.enable = true;
         limine = {
           enable = true;
