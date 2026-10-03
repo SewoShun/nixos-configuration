@@ -58,8 +58,13 @@ delib.module {
             color: @text;
           }
 
+          scrolledwindow,
+          viewport,
+          list,
+          row,
           .matches {
-            background-color: transparent;
+            background-color: @base;
+            color: @text;
             border-radius: 8px;
           }
 
@@ -67,14 +72,28 @@ delib.module {
             margin-top: 8px;
           }
 
-          .match {
-            padding: 4px;
-            border-radius: 8px;
-            background: transparent;
+          list.plugin {
+            background-color: transparent;
+          }
+
+          label.match {
             color: @text;
           }
 
-          .match:selected {
+          label.match.description {
+            font-size: 0.9rem;
+            color: @subtext0;
+          }
+
+          .match {
+            padding: 4px;
+            border-radius: 8px;
+            background-color: @base;
+            color: @text;
+          }
+
+          .match:selected,
+          row:selected {
             background-color: @surface1;
           }
         '';
