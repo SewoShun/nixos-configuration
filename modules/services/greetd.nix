@@ -1,7 +1,7 @@
 {
   delib,
   pkgs,
-  config,
+  lib,
   ...
 }:
 delib.module {
@@ -17,25 +17,25 @@ delib.module {
   nixos.ifEnabled =
     { cfg, ... }:
     {
-      services.greetd =
-        let
-          commands = {
-            regreet = "${pkgs.lib.getExe pkgs.cage} -s -mlast -- ${pkgs.lib.getExe config.programs.regreet.package}";
-            tuigreet = "${pkgs.lib.getExe pkgs.tuigreet} --time --cmd niri-session";
-          };
-        in
-        {
-          enable = true;
-          settings.default_session = {
-            user = "sewo";
-            command =
-              if cfg.greeter == "regreet" then
-                commands.regreet
-              else if cfg.greeter == "tuigreet" then
-                commands.tuigreet
-              else
-                null;
-          };
+      services.greetd = {
+        enable = true;
+        settings.default_session = lib.mkIf (cfg.greeter == "tuigreet") {
+          user = "sewo";
+          command = "${lib.getExe pkgs.tuigreet} --time --cmd niri-session";
         };
+      };
+
+      # programs.regreet sets services.greetd.settings.default_session.command
+      programs.regreet = lib.mkIf (cfg.greeter == "regreet") {
+        enable = true;
+        cageArgs = [
+          "-s"
+          "-mlast"
+        ];
+        settings.background = {
+          path = pkgs.nixos-artwork.wallpapers.catppuccin-mocha.gnomeFilePath;
+          fit = "Cover";
+        };
+      };
     };
 }

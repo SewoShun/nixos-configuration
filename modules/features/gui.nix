@@ -15,7 +15,10 @@ delib.module {
       dunst.enable = true;
       fcitx5.enable = true;
       kmscon.enable = true;
-      greetd.enable = true;
+      greetd = {
+        enable = true;
+        greeter = "regreet";
+      };
       yaskkserv2.enable = true;
     };
 
