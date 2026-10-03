@@ -30,6 +30,8 @@ delib.module {
             zen-browser = lib.getExe homeConfig.programs.zen-browser.package;
             wezterm = lib.getExe homeConfig.programs.wezterm.package;
             noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
+            awww = lib.getExe homeConfig.services.awww.package;
+            wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha-alt.gnomeFilePath;
             noctalia-call =
               cmd:
               [
@@ -134,6 +136,14 @@ delib.module {
                   "-d"
                 ];
               }
+              {
+                # awww-daemon is started by systemd, so wait until it is ready
+                argv = [
+                  "sh"
+                  "-c"
+                  "until ${awww} query >/dev/null 2>&1; do sleep 0.1; done; ${awww} img ${wallpaper}"
+                ];
+              }
             ];
 
             layout = {
@@ -158,7 +168,7 @@ delib.module {
               {
                 matches = [
                   {
-                    namespace = "^noctalia-wallpaper*";
+                    namespace = "^awww-daemon";
                   }
                 ];
                 place-within-backdrop = true;

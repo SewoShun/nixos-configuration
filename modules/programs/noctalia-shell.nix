@@ -13,6 +13,8 @@ delib.module {
         position = "left";
       };
       wallpaper = {
+        # wallpaper is set by awww
+        enabled = false;
         overviewEnabled = false;
       };
       colorSchemes.predefinedScheme = "Catppuccin";
