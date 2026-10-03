@@ -10,9 +10,9 @@ catppuccin/nix は anyrun に対応していないので、catppuccin の palett
 
 **Status:** ready-for-agent
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] `Mod+d` で anyrun が開き、アプリ名を入力すると候補が出て、`Enter` で起動できる
-- [ ] `Esc` で anyrun が閉じる
-- [ ] anyrun の配色が catppuccin の現在の flavor（mocha）になっていて、フォントが ZedMono Nerd Font になっている
-- [ ] flavor を一時的に別のもの（たとえば latte）に変えてビルドすると、生成された CSS の色が変わる（確かめたら元に戻す）
-- [ ] `Mod+d` が Noctalia のランチャーを呼ばなくなっている
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] `Mod+d` で anyrun が開き、アプリ名を入力すると候補が出て、`Enter` で起動できる
+- [x] `Esc` で anyrun が閉じる
+- [x] anyrun の配色が catppuccin の現在の flavor（mocha）になっていて、フォントが ZedMono Nerd Font になっている
+- [x] flavor を一時的に別のもの（たとえば latte）に変えてビルドすると、生成された CSS の色が変わる（確かめたら元に戻す）
+- [x] `Mod+d` が Noctalia のランチャーを呼ばなくなっている

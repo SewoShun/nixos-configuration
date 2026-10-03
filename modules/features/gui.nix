@@ -23,6 +23,7 @@ delib.module {
     };
 
     programs = {
+      anyrun.enable = true;
       discord.enable = true;
       firefox.enable = true;
       gamemode.enable = true;
