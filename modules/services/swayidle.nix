@@ -14,7 +14,7 @@ delib.module {
     let
       bctl = "${lib.getExe pkgs.brightnessctl}";
       niri = "${lib.getExe homeConfig.programs.niri.package}";
-      lock = "${lib.getExe homeConfig.programs.noctalia-shell.package} ipc call lockScreen lock";
+      lock = "${lib.getExe homeConfig.programs.swaylock.package} -f";
     in
     {
       enable = true;

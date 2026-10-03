@@ -31,7 +31,7 @@ delib.module {
             wezterm = lib.getExe homeConfig.programs.wezterm.package;
             noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
             awww = lib.getExe homeConfig.services.awww.package;
-            wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha-alt.gnomeFilePath;
+            inherit (myconfig.constants) wallpaper;
             noctalia-call =
               cmd:
               [

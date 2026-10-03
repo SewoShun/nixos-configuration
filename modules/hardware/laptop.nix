@@ -8,7 +8,7 @@ delib.module {
     { myconfig, ... }:
     {
       services = {
-        swayidle.enable = myconfig.programs.niri.enable && myconfig.programs.noctalia-shell.enable;
+        swayidle.enable = myconfig.programs.niri.enable && myconfig.programs.swaylock.enable;
         tlp.enable = true;
         upower.enable = true;
       };

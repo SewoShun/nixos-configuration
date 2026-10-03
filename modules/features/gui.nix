@@ -29,6 +29,7 @@ delib.module {
       niri.enable = true;
       noctalia-shell.enable = true;
       steam.enable = true;
+      swaylock.enable = true;
       wezterm.enable = true;
       zed-editor.enable = true;
       zen-browser.enable = true;

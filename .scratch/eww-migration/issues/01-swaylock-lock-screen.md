@@ -6,12 +6,17 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] swaylock を直接起動すると、壁紙が背景で catppuccin 配色のロック画面が出て、パスワードで解除できる
-- [ ] laptop で無操作のまま swayidle のロックの時間を過ぎると、swaylock でロックされる
-- [ ] laptop でサスペンドして復帰すると、swaylock でロックされた状態になっている
-- [ ] Noctalia のロック画面が使われなくなっている（swayidle の設定がどこからも Noctalia を参照していない）
-- [ ] 壁紙のパスがリポジトリ内で 1 か所だけに定義され、awww と swaylock の両方がそれを参照している
-- [ ] desktop には swayidle が入らない（現状どおり）
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] swaylock を直接起動すると、壁紙が背景で catppuccin 配色のロック画面が出て、パスワードで解除できる
+- [x] laptop で無操作のまま swayidle のロックの時間を過ぎると、swaylock でロックされる
+- [x] laptop でサスペンドして復帰すると、swaylock でロックされた状態になっている
+- [x] Noctalia のロック画面が使われなくなっている（swayidle の設定がどこからも Noctalia を参照していない）
+- [x] 壁紙のパスがリポジトリ内で 1 か所だけに定義され、awww と swaylock の両方がそれを参照している
+- [x] desktop には swayidle が入らない（現状どおり）
+
+## Comments
+
+- 実装済み。thinkpad では fprintd が有効なため、パスワードですぐに解除できるよう swaylock の PAM では指紋認証を切った（`security.pam.services.swaylock.fprintAuth = false`）。指紋で解除したくなったらこの行を外す。
+- 実機（laptop）で、直接起動・無操作でのロック・サスペンド復帰時のロックの 3 つを確認した。
