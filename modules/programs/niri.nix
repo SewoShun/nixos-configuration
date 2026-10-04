@@ -36,6 +36,7 @@ delib.module {
               import ../../lib/eww-osd.nix {
                 inherit pkgs;
                 eww = homeConfig.programs.eww.package;
+                niri = homeConfig.programs.niri.package;
               }
             );
             awww = lib.getExe homeConfig.services.awww.package;

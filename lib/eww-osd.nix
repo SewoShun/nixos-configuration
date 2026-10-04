@@ -1,6 +1,10 @@
 # Script behind the volume and brightness keys: changes the value and drives
 # the eww OSD window. Built here so that niri can reference it directly.
-{ pkgs, eww }:
+{
+  pkgs,
+  eww,
+  niri,
+}:
 pkgs.writeShellApplication {
   name = "eww-osd";
   runtimeInputs = with pkgs; [
@@ -10,6 +14,7 @@ pkgs.writeShellApplication {
     gawk
     gnugrep
     jq
+    niri
     wireplumber
   ];
   text = builtins.readFile ../config/eww-scripts/osd.sh;

@@ -11,14 +11,16 @@ token_file=$runtime_dir/eww-osd-token
 host_file=${XDG_CONFIG_HOME:-$HOME/.config}/eww/host.json
 
 show() {
-  local icon=$1 value=$2 muted=$3 token active
+  local icon=$1 value=$2 muted=$3 token active output
 
   eww update "osd_icon=$icon" "osd_value=$value" "osd_muted=$muted"
 
   active=$(eww active-windows)
   if ! grep -q '^osd:' <<<"$active"; then
+    # GTK has no primary monitor under niri, so name the focused output explicitly
+    output=$(niri msg --json focused-output | jq -r '.name // empty') || output=
     # a concurrent key press may have opened it already; that must not skip the timer reset below
-    eww open osd || true
+    eww open osd ${output:+--screen "$output"} || true
   fi
 
   # only the timer started by the latest key press may close the OSD
