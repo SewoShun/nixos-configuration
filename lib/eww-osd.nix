@@ -17,5 +17,5 @@ pkgs.writeShellApplication {
     niri
     wireplumber
   ];
-  text = builtins.readFile ../config/eww-scripts/osd.sh;
+  text = builtins.readFile ../config/eww-scripts/volume-state.sh + builtins.readFile ../config/eww-scripts/osd.sh;
 }

@@ -2,8 +2,8 @@
 (include "./listeners.yuck")
 
 ; Vertical bar on the left of each monitor, opened by eww-bar (config/eww-scripts/bar.sh)
-; with the monitor's name as its argument.
-(defwindow bar [monitor]
+; with the monitor's name and whether the host is a laptop (host.json) as its arguments.
+(defwindow bar [monitor laptop]
   :monitor monitor
   :geometry (geometry :x "0px"
                       :y "0px"
@@ -14,15 +14,20 @@
   :exclusive true
   :focusable "none"
   :namespace "eww-bar"
-  (bar :monitor monitor))
+  (bar :monitor monitor :laptop laptop))
 
-(defwidget bar [monitor]
+(defwidget bar [monitor laptop]
   (box :class "bar"
        :orientation "v"
        :space-evenly false
        :spacing 16
     (workspaces :monitor monitor)
-    (datetime)))
+    (datetime)
+    (volume)
+    ; a desktop has no backlight and no battery
+    (box :visible laptop (brightness))
+    (box :visible laptop (battery))
+    (network)))
 
 ; workspaces holds the workspaces of every output (config/eww-scripts/workspaces.sh)
 (defwidget workspaces [monitor]
@@ -44,6 +49,43 @@
     (label :text "󰥔")
     (label :text {formattime(EWW_TIME, "%H")})
     (label :text {formattime(EWW_TIME, "%M")})))
+
+; An icon with an optional value below it
+(defwidget indicator [class icon ?text]
+  (box :class "indicator ${class}"
+       :orientation "v"
+       :space-evenly false
+    (label :class "indicator-icon" :text icon)
+    (label :class "indicator-value" :visible {text != ""} :text text)))
+
+; volume follows PipeWire (config/eww-scripts/volume.sh)
+(defwidget volume []
+  (indicator :class "volume ${volume?.muted == true ? 'muted' : ''}"
+             :icon {volume?.icon ?: ""}
+             :text "${volume?.value ?: 0}%"))
+
+; brightness follows the backlight (config/eww-scripts/brightness.sh)
+(defwidget brightness []
+  (indicator :class "brightness"
+             :icon "󰃠"
+             :text "${brightness}%"))
+
+; EWW_BATTERY holds one entry per battery plus total_avg (null without a battery)
+(defwidget battery []
+  (battery-indicator
+    :capacity {round(EWW_BATTERY?.total_avg ?: 0, 0)}
+    :plugged {jq(EWW_BATTERY, '[.[] | select(type == "object") | .status] | any(. != "Discharging")')}))
+
+(defwidget battery-indicator [capacity plugged]
+  (indicator :class "battery ${plugged ? 'plugged' : capacity <= 15 ? 'low' : ''}"
+             ; one icon per 10%, from empty to full
+             :icon {plugged ? "󰂄" : substring("󰂎󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰁹", round(capacity / 10, 0), 1)}
+             :text "${capacity}%"))
+
+; network follows NetworkManager (config/eww-scripts/network.sh); icon only
+(defwidget network []
+  (indicator :class "network ${network?.state ?: ''}"
+             :icon {network?.icon ?: ""}))
 
 ; OSD values are pushed by eww-osd (config/eww-scripts/osd.sh)
 (defvar osd_icon "")

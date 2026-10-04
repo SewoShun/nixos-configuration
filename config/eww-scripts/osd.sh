@@ -36,7 +36,7 @@ show() {
 }
 
 volume() {
-  local sink=@DEFAULT_AUDIO_SINK@ out value muted=false icon
+  local sink=@DEFAULT_AUDIO_SINK@
 
   case ${1:-} in
     up) wpctl set-volume --limit 1.0 "$sink" "${step}%+" ;;
@@ -45,20 +45,8 @@ volume() {
     *) usage ;;
   esac
 
-  out=$(wpctl get-volume "$sink")
-  value=$(awk '{ printf "%d", $2 * 100 + 0.5 }' <<<"$out")
-  if [[ $out == *MUTED* ]]; then
-    muted=true
-    icon=$'\U000f075f'
-  elif ((value == 0)); then
-    icon=$''
-  elif ((value < 50)); then
-    icon=$''
-  else
-    icon=$''
-  fi
-
-  show "$icon" "$value" "$muted"
+  volume_state
+  show "$volume_icon" "$volume_value" "$volume_muted"
 }
 
 brightness() {

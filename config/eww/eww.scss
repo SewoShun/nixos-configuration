@@ -124,3 +124,40 @@ window {
     background-color: $red;
   }
 }
+
+.indicator {
+  margin: 0 4px;
+}
+
+.indicator-icon {
+  font-size: 18px;
+  color: $mauve;
+}
+
+.indicator-value {
+  font-size: 13px;
+}
+
+.volume.muted {
+
+  .indicator-icon,
+  .indicator-value {
+    color: $overlay0;
+  }
+}
+
+.battery.plugged .indicator-icon {
+  color: $green;
+}
+
+.battery.low {
+
+  .indicator-icon,
+  .indicator-value {
+    color: $red;
+  }
+}
+
+.network.disconnected .indicator-icon {
+  color: $overlay0;
+}

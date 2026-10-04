@@ -21,6 +21,9 @@ delib.module {
         inherit pkgs;
         niri = homeConfig.programs.niri.package;
       };
+      volumeListener = import ../../lib/eww-volume.nix { inherit pkgs; };
+      brightnessListener = import ../../lib/eww-brightness.nix { inherit pkgs; };
+      networkListener = import ../../lib/eww-network.nix { inherit pkgs; };
       openBars = import ../../lib/eww-bar.nix {
         inherit pkgs;
         eww = homeConfig.programs.eww.package;
@@ -58,6 +61,9 @@ delib.module {
         # listeners run scripts from the Nix store, so their paths are generated
         "eww/listeners.yuck".text = ''
           (deflisten workspaces :initial "{}" "${lib.getExe workspacesListener}")
+          (deflisten volume :initial "{}" "${lib.getExe volumeListener}")
+          (deflisten brightness :initial "0" "${lib.getExe brightnessListener}")
+          (deflisten network :initial "{}" "${lib.getExe networkListener}")
         '';
       };
     };
