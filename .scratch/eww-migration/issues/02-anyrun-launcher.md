@@ -8,7 +8,7 @@ catppuccin/nix は anyrun に対応していないので、catppuccin の palett
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
 - [x] `Mod+d` で anyrun が開き、アプリ名を入力すると候補が出て、`Enter` で起動できる
