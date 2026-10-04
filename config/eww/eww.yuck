@@ -2,8 +2,9 @@
 (include "./listeners.yuck")
 
 ; Vertical bar on the left of each monitor, opened by eww-bar (config/eww-scripts/bar.sh)
-; with the monitor's name and whether the host is a laptop (host.json) as its arguments.
-(defwindow bar [monitor laptop]
+; with the monitor's name, whether the host is a laptop and whether the monitor is the
+; primary one (host.json) as its arguments.
+(defwindow bar [monitor laptop primary]
   :monitor monitor
   :geometry (geometry :x "0px"
                       :y "0px"
@@ -14,20 +15,35 @@
   :exclusive true
   :focusable "none"
   :namespace "eww-bar"
-  (bar :monitor monitor :laptop laptop))
+  (bar :monitor monitor :laptop laptop :primary primary))
 
-(defwidget bar [monitor laptop]
+(defwidget bar [monitor laptop primary]
   (box :class "bar"
        :orientation "v"
        :space-evenly false
-       :spacing 16
-    (workspaces :monitor monitor)
-    (datetime)
-    (volume)
-    ; a desktop has no backlight and no battery
-    (box :visible laptop (brightness))
-    (box :visible laptop (battery))
-    (network)))
+    (box :orientation "v"
+         :space-evenly false
+         :spacing 16
+         :vexpand true
+      (workspaces :monitor monitor)
+      (datetime)
+      (volume)
+      ; a desktop has no backlight and no battery
+      (box :visible laptop (brightness))
+      (box :visible laptop (battery))
+      (network))
+    ; a tray can be shown on one monitor only
+    (box :visible primary (tray))))
+
+; Icons only: the tray is never clicked (ADR-0002), so it is made insensitive and
+; eww's activate and menu handlers never fire
+(defwidget tray []
+  (box :class "tray"
+       :active false
+    (systray :orientation "v"
+             :space-evenly false
+             :spacing 8
+             :icon-size 20)))
 
 ; workspaces holds the workspaces of every output (config/eww-scripts/workspaces.sh)
 (defwidget workspaces [monitor]

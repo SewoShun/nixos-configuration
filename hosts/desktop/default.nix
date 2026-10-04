@@ -14,6 +14,8 @@ delib.host {
     }
     {
       name = "DP-1";
+      # primary monitor (CONTEXT.md)
+      primary = true;
       refreshRate = 60;
       width = 3440;
       height = 1440;
