@@ -22,8 +22,6 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    noctalia-shell.url = "github:noctalia-dev/noctalia-shell/legacy-v4";
-    noctalia-shell.inputs.nixpkgs.follows = "nixpkgs";
     ragenix.url = "github:yaxitech/ragenix";
     ragenix.inputs.nixpkgs.follows = "nixpkgs";
     xremap.url = "github:xremap/nix-flake";

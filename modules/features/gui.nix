@@ -29,7 +29,6 @@ delib.module {
       firefox.enable = true;
       gamemode.enable = true;
       niri.enable = true;
-      noctalia-shell.enable = true;
       steam.enable = true;
       swaylock.enable = true;
       wezterm.enable = true;

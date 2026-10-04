@@ -29,7 +29,6 @@ delib.module {
           let
             zen-browser = lib.getExe homeConfig.programs.zen-browser.package;
             wezterm = lib.getExe homeConfig.programs.wezterm.package;
-            noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
             anyrun = lib.getExe homeConfig.programs.anyrun.package;
             wleave = lib.getExe homeConfig.programs.wleave.package;
             osd = lib.getExe (
@@ -48,14 +47,6 @@ delib.module {
             );
             awww = lib.getExe homeConfig.services.awww.package;
             inherit (myconfig.constants) wallpaper;
-            noctalia-call =
-              cmd:
-              [
-                noctalia-shell
-                "ipc"
-                "call"
-              ]
-              ++ (lib.splitString " " cmd);
 
             outputs = lib.listToAttrs (
               map (output: {
@@ -80,13 +71,11 @@ delib.module {
               "Mod+b".action = spawn zen-browser;
               "Mod+d".action = spawn anyrun;
               "Mod+Shift+p".action = spawn wleave;
-              "Mod+Comma".action.spawn = noctalia-call "settings toggle";
               "Mod+Shift+m".action.spawn = [
                 popup
                 "toggle"
                 "sysmon"
               ];
-              "Mod+c".action.spawn = noctalia-call "calendar toggle";
 
               XF86MonBrightnessUp.action.spawn = [
                 osd

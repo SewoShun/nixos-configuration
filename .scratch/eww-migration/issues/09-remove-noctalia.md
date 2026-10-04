@@ -15,8 +15,8 @@
 
 **Status:** ready-for-agent
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] リポジトリ内に `noctalia` という文字列が残っていない（`docs/adr/` と `.scratch/` の記述は除く）
-- [ ] `flake.lock` に noctalia-shell の input がない
-- [ ] `Mod+Comma` と `Mod+c` を押しても何も起きない（キーバインドが存在しない）
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] リポジトリ内に `noctalia` という文字列が残っていない（`docs/adr/` と `.scratch/` の記述は除く）
+- [x] `flake.lock` に noctalia-shell の input がない
+- [x] `Mod+Comma` と `Mod+c` を押しても何も起きない（キーバインドが存在しない）
 - [ ] `notify-send test` で dunst の通知（catppuccin 配色）が出る
