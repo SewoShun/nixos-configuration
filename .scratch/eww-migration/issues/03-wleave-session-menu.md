@@ -6,14 +6,14 @@
 
 **Blocked by:** 01（ロックのボタンが swaylock を呼ぶため）
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] `Mod+Shift+p` で wleave が開き、catppuccin の配色になっている
-- [ ] `l` で swaylock のロック画面になる
-- [ ] `e` で niri が終了し、greetd の画面に戻る
-- [ ] `s` でサスペンドする
-- [ ] `r` で再起動し、`p` で電源が切れる（実際に押して確かめるのは 1 回だけでよい）
-- [ ] laptop には `h`（ハイバネート）のボタンがあり、desktop にはない
-- [ ] `Esc` で wleave が閉じる
-- [ ] `Mod+Shift+p` が Noctalia のセッションメニューを呼ばなくなっている
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] `Mod+Shift+p` で wleave が開き、catppuccin の配色になっている
+- [x] `l` で swaylock のロック画面になる
+- [x] `e` で niri が終了し、greetd の画面に戻る
+- [x] `s` でサスペンドする
+- [x] `r` で再起動し、`p` で電源が切れる（実際に押して確かめるのは 1 回だけでよい）
+- [x] laptop には `h`（ハイバネート）のボタンがあり、desktop にはない
+- [x] `Esc` で wleave が閉じる
+- [x] `Mod+Shift+p` が Noctalia のセッションメニューを呼ばなくなっている
