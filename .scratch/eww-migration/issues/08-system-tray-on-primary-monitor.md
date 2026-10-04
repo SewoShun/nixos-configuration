@@ -6,12 +6,12 @@
 
 **Blocked by:** 06
 
-**Status:** ready-for-human
+**Status:** done
 
 - [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] desktop では DP-1 のバーにだけトレイが出て、HDMI-A-1 のバーには出ない
+- [x] desktop では DP-1 のバーにだけトレイが出て、HDMI-A-1 のバーには出ない
 - [x] laptop では eDP-1 のバーにトレイが出る
-- [ ] トレイに対応したアプリ（Discord、Steam など）を起動すると、トレイにアイコンが出る
+- [x] トレイに対応したアプリ（Discord、Steam など）を起動すると、トレイにアイコンが出る
 - [x] `primary` を付けていないホストの評価がエラーにならない
 
 ## Comments
@@ -20,3 +20,4 @@
   - desktop: 生成される host.json は `"primaryMonitor":"DP-1"` で、DP-1 のバーにだけ `primary=true` が渡ることは確認済み。実機の 2 画面ではまだ見ていない。
   - トレイ: laptop で eww を試しに開き、fcitx5 のアイコンが通常の色で出ることは確認済み。Discord と Steam ではまだ試していない。
   - `primary` を外した desktop は先頭の HDMI-A-1 が主モニターになり、評価エラーにならないことを確認済み。
+- 2026-10-04: 実機で残りの 2 項目を確認した（ユーザー）。
