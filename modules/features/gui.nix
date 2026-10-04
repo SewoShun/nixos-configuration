@@ -32,6 +32,7 @@ delib.module {
       steam.enable = true;
       swaylock.enable = true;
       wezterm.enable = true;
+      wleave.enable = true;
       zed-editor.enable = true;
       zen-browser.enable = true;
     };
