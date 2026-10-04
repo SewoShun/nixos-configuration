@@ -13,10 +13,10 @@
 
 **Blocked by:** 06
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] 音量キーで音量やミュート状態を変えると、バーの表示が追従する。pavucontrol で変えた場合も追従する
-- [ ] laptop では輝度の表示が出て、輝度キーで変えると追従する。desktop には輝度の表示が出ない
-- [ ] laptop ではバッテリーのアイコンと % が出て、電源をつなぐと充電中のアイコンに変わる。desktop にはバッテリーの表示が出ない
-- [ ] ネットワークのアイコンが、有線、Wi-Fi（電波強度の段階）、切断で変わる（laptop で Wi-Fi を切ったりつないだりして確かめる）
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] 音量キーで音量やミュート状態を変えると、バーの表示が追従する。pavucontrol で変えた場合も追従する
+- [x] laptop では輝度の表示が出て、輝度キーで変えると追従する。desktop には輝度の表示が出ない
+- [x] laptop ではバッテリーのアイコンと % が出て、電源をつなぐと充電中のアイコンに変わる。desktop にはバッテリーの表示が出ない
+- [x] ネットワークのアイコンが、有線、Wi-Fi（電波強度の段階）、切断で変わる（laptop で Wi-Fi を切ったりつないだりして確かめる）
