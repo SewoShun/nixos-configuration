@@ -17,7 +17,7 @@
 
 **Status:** ready-for-agent
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
 - [ ] ログインすると eww のデーモンが自動で起動していて、`journalctl --user -u eww` でログが見られる。デーモンを kill すると自動で再起動する
 - [ ] 音量キーで音量が 1 段ずつ変わり、画面下の中央に catppuccin 配色の OSD（アイコン、ゲージ、%）が出る
 - [ ] ミュートキーでミュートすると、OSD のアイコンが変わってゲージが灰色になる。もう一度押すと元に戻る

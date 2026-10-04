@@ -32,6 +32,12 @@ delib.module {
             noctalia-shell = lib.getExe homeConfig.programs.noctalia-shell.package;
             anyrun = lib.getExe homeConfig.programs.anyrun.package;
             wleave = lib.getExe homeConfig.programs.wleave.package;
+            osd = lib.getExe (
+              import ../../lib/eww-osd.nix {
+                inherit pkgs;
+                eww = homeConfig.programs.eww.package;
+              }
+            );
             awww = lib.getExe homeConfig.services.awww.package;
             inherit (myconfig.constants) wallpaper;
             noctalia-call =
@@ -70,11 +76,31 @@ delib.module {
               "Mod+Shift+m".action.spawn = noctalia-call "systemMonitor toggle";
               "Mod+c".action.spawn = noctalia-call "calendar toggle";
 
-              XF86MonBrightnessUp.action.spawn = noctalia-call "brightness increase";
-              XF86MonBrightnessDown.action.spawn = noctalia-call "brightness decrease";
-              XF86AudioRaiseVolume.action.spawn = noctalia-call "volume increase";
-              XF86AudioLowerVolume.action.spawn = noctalia-call "volume decrease";
-              XF86AudioMute.action.spawn = noctalia-call "volume muteOutput";
+              XF86MonBrightnessUp.action.spawn = [
+                osd
+                "brightness"
+                "up"
+              ];
+              XF86MonBrightnessDown.action.spawn = [
+                osd
+                "brightness"
+                "down"
+              ];
+              XF86AudioRaiseVolume.action.spawn = [
+                osd
+                "volume"
+                "up"
+              ];
+              XF86AudioLowerVolume.action.spawn = [
+                osd
+                "volume"
+                "down"
+              ];
+              XF86AudioMute.action.spawn = [
+                osd
+                "volume"
+                "mute"
+              ];
 
               "Mod+s".action.screenshot.show-pointer = true;
               "Mod+Shift+s".action.screenshot-window.write-to-disk = true;

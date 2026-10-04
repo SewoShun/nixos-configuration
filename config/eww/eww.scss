@@ -1,0 +1,56 @@
+@import "colors";
+
+* {
+  all: unset;
+  font-family: "ZedMono Nerd Font Propo";
+  font-size: 16px;
+  color: $text;
+}
+
+window {
+  background: transparent;
+}
+
+.osd {
+  padding: 14px 20px;
+  border: 2px solid $mauve;
+  border-radius: 14px;
+  background-color: rgba($base, 0.95);
+}
+
+.osd-icon {
+  min-width: 28px;
+  font-size: 22px;
+  color: $mauve;
+}
+
+.osd-gauge {
+  trough {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: $surface0;
+  }
+
+  progress {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: $mauve;
+  }
+}
+
+.osd-value {
+  min-width: 48px;
+  font-weight: bold;
+}
+
+.osd.muted {
+  border-color: $overlay0;
+
+  .osd-icon {
+    color: $overlay0;
+  }
+
+  .osd-gauge progress {
+    background-color: $overlay0;
+  }
+}

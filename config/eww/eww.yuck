@@ -1,0 +1,27 @@
+; OSD values are pushed by eww-osd (config/eww-scripts/osd.sh)
+(defvar osd_icon "")
+(defvar osd_value 0)
+(defvar osd_muted false)
+
+(defwindow osd
+  :geometry (geometry :x "0px"
+                      :y "64px"
+                      :width "320px"
+                      :anchor "bottom center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable "none"
+  :namespace "eww-osd"
+  (osd))
+
+(defwidget osd []
+  (box :class "osd ${osd_muted ? 'muted' : ''}"
+       :orientation "h"
+       :space-evenly false
+       :spacing 14
+    (label :class "osd-icon" :text osd_icon)
+    (progress :class "osd-gauge"
+              :hexpand true
+              :valign "center"
+              :value osd_value)
+    (label :class "osd-value" :text "${osd_value}%")))
