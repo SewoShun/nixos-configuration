@@ -6,11 +6,11 @@
 
 **Blocked by:** 04
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
-- [ ] `Mod+Shift+m` でポップアップが開き、もう一度押すと閉じる
-- [ ] ポップアップに CPU 使用率、メモリ、ディスク、温度が表示され、時間の経過とともに値が更新される
-- [ ] ポップアップが開いている間も、フォーカスしているウィンドウにキー入力が届く
-- [ ] 配色とフォントが OSD と揃っている
-- [ ] `Mod+Shift+m` が Noctalia のシステムモニターを呼ばなくなっている
+- [x] desktop と thinkpad-e14-gen7 の両方で `system.build.toplevel` がビルドできる
+- [x] `Mod+Shift+m` でポップアップが開き、もう一度押すと閉じる
+- [x] ポップアップに CPU 使用率、メモリ、ディスク、温度が表示され、時間の経過とともに値が更新される
+- [x] ポップアップが開いている間も、フォーカスしているウィンドウにキー入力が届く
+- [x] 配色とフォントが OSD と揃っている
+- [x] `Mod+Shift+m` が Noctalia のシステムモニターを呼ばなくなっている

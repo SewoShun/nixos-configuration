@@ -54,3 +54,52 @@ window {
     background-color: $overlay0;
   }
 }
+
+.popup {
+  padding: 18px 22px;
+  border: 2px solid $mauve;
+  border-radius: 14px;
+  background-color: rgba($base, 0.95);
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: $mauve;
+}
+
+.metric-icon {
+  min-width: 28px;
+  font-size: 20px;
+  color: $mauve;
+}
+
+.metric-text {
+  color: $subtext0;
+}
+
+.gauge {
+  trough {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: $surface0;
+  }
+
+  progress {
+    min-height: 8px;
+    border-radius: 4px;
+    background-color: $mauve;
+  }
+}
+
+.metric.hot {
+
+  .metric-icon,
+  .metric-text {
+    color: $red;
+  }
+
+  .gauge progress {
+    background-color: $red;
+  }
+}

@@ -25,3 +25,46 @@
               :valign "center"
               :value osd_value)
     (label :class "osd-value" :text "${osd_value}%")))
+
+; System monitor popup, toggled by eww-popup (config/eww-scripts/popup.sh).
+; Values come from eww's built-in variables.
+(defwindow sysmon
+  :geometry (geometry :x "0px"
+                      :y "0px"
+                      :width "360px"
+                      :anchor "center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable "none"
+  :namespace "eww-sysmon"
+  (sysmon))
+
+(defwidget sysmon []
+  (box :class "popup"
+       :orientation "v"
+       :space-evenly false
+       :spacing 14
+    (label :class "popup-title" :halign "start" :text "System")
+    (metric :icon "" :name "CPU"
+            :percent {round(EWW_CPU.avg, 0)}
+            :text "${round(EWW_CPU.avg, 0)}%")
+    (metric :icon "" :name "Memory"
+            :percent {round(EWW_RAM.used_mem_perc, 0)}
+            :text "${round(EWW_RAM.used_mem / 1073741824, 1)} / ${round(EWW_RAM.total_mem / 1073741824, 1)} GiB")
+    (metric :icon "󰋊" :name "Disk"
+            :percent {round(EWW_DISK["/"].used_perc, 0)}
+            :text "${round((EWW_DISK["/"].total - EWW_DISK["/"].free) / 1073741824, 0)} / ${round(EWW_DISK["/"].total / 1073741824, 0)} GiB")
+    (metric :icon "󰔏" :name "Temp"
+            :percent {round(jq(EWW_TEMPS, "[.[] | tonumber] | max"), 0)}
+            :text "${round(jq(EWW_TEMPS, "[.[] | tonumber] | max"), 0)}°C")))
+
+(defwidget metric [icon name percent text]
+  (box :class "metric ${percent >= 85 ? 'hot' : ''}"
+       :orientation "v"
+       :space-evenly false
+       :spacing 6
+    (box :orientation "h" :space-evenly false :spacing 10
+      (label :class "metric-icon" :text icon)
+      (label :class "metric-name" :halign "start" :hexpand true :text name)
+      (label :class "metric-text" :text text))
+    (progress :class "gauge" :value percent)))

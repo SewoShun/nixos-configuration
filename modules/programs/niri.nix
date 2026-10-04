@@ -39,6 +39,13 @@ delib.module {
                 niri = homeConfig.programs.niri.package;
               }
             );
+            popup = lib.getExe (
+              import ../../lib/eww-popup.nix {
+                inherit pkgs;
+                eww = homeConfig.programs.eww.package;
+                niri = homeConfig.programs.niri.package;
+              }
+            );
             awww = lib.getExe homeConfig.services.awww.package;
             inherit (myconfig.constants) wallpaper;
             noctalia-call =
@@ -74,7 +81,11 @@ delib.module {
               "Mod+d".action = spawn anyrun;
               "Mod+Shift+p".action = spawn wleave;
               "Mod+Comma".action.spawn = noctalia-call "settings toggle";
-              "Mod+Shift+m".action.spawn = noctalia-call "systemMonitor toggle";
+              "Mod+Shift+m".action.spawn = [
+                popup
+                "toggle"
+                "sysmon"
+              ];
               "Mod+c".action.spawn = noctalia-call "calendar toggle";
 
               XF86MonBrightnessUp.action.spawn = [
