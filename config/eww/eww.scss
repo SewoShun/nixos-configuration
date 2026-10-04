@@ -11,6 +11,27 @@ window {
   background: transparent;
 }
 
+.bar {
+  padding: 12px 0;
+  background-color: $mantle;
+}
+
+.workspace {
+  margin: 0 6px;
+  padding: 4px 0;
+  border-radius: 8px;
+}
+
+.workspace.empty {
+  color: $overlay0;
+}
+
+.workspace.active {
+  font-weight: bold;
+  color: $base;
+  background-color: $mauve;
+}
+
 .osd {
   padding: 14px 20px;
   border: 2px solid $mauve;

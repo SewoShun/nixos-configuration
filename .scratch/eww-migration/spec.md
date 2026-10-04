@@ -158,7 +158,7 @@ Status: ready-for-agent
   - home-manager の `programs.eww.configDir` は非推奨なので使わない。
   - `yuckConfig`/`scssConfig` だけでは複数のファイルを配置できないので、`xdg.configFile` を使う。
   - 配色の SCSS とホストごとの差分（輝度とバッテリーを出すか、主モニターの名前、モニターの一覧）は Nix で生成し、同じディレクトリに置く。
-- **起動**: `programs.eww.systemd.enable` でデーモンを `graphical-session.target` に紐づける。ウィンドウ（各モニターのバー）は niri の `spawn-at-startup` から開く。
+- **起動**: `programs.eww.systemd.enable` でデーモンを `graphical-session.target` に紐づける。ウィンドウ（各モニターのバー）は eww サービスの `ExecStartPost` から開く。デーモンが再起動するとウィンドウも消えるので、ログイン時だけでなく再起動のたびに開き直すため。
 - **バーのウィンドウ**: モニターごとに 1 つずつ作り、左に縦置きして、`exclusive` で画面の領域を予約する。上から次の順に並べる。
   - ワークスペース
   - 日付と時刻（カレンダーアイコン、月、日、時計アイコン、時、分）

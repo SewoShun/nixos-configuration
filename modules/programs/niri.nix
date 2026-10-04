@@ -169,7 +169,6 @@ delib.module {
             screenshot-path = "~/Pictures/Screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png";
 
             spawn-at-startup = [
-              { argv = [ noctalia-shell ]; }
               {
                 argv = [
                   "fcitx5"
