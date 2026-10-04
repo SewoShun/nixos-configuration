@@ -1,4 +1,4 @@
-{ delib, ... }:
+{ delib, pkgs, ... }:
 delib.module {
   name = "programs.swaylock";
 
@@ -15,7 +15,12 @@ delib.module {
         settings = {
           image = myconfig.constants.wallpaper;
           scaling = "fill";
+          clock = true;
+          datestr = "%Y/%m/%d";
+          indicator-idle-visible = true;
+          fade-in = 0.5;
         };
+        package = pkgs.swaylock-effects;
       };
     };
 }
