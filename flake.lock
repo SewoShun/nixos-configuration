@@ -72,11 +72,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793032444,
-        "narHash": "sha256-lqlQogMU5JIfQYCBx3BPBcWSeOBOJSnuPyZ1mCimq7E=",
+        "lastModified": 1793096571,
+        "narHash": "sha256-i/6ZE2wN1U4VmaLnVt4Gz7RCvFHy3XGkJ5AY2NdMs+A=",
         "owner": "patrickjaja",
         "repo": "claude-desktop-extra",
-        "rev": "8f8c55464970d519d120d6360465cef268997a4f",
+        "rev": "86992d3dc1a0a832303dee02d0a9786afb514655",
         "type": "github"
       },
       "original": {
@@ -325,11 +325,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793033486,
-        "narHash": "sha256-fXVURa0+CSCgaxLt8tmPNJq2U+fGYOwbk5j2YUe7kSc=",
+        "lastModified": 1793124281,
+        "narHash": "sha256-KdGTOgYXgMDA/ymTV10yLMt9tOjz9EmTgnTvaD+bhe4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7db163b2aee7e410e396b48aed02f646d742b9b8",
+        "rev": "1e3ebeb683d055d1675d3f64e6d2b186cb2ee504",
         "type": "github"
       },
       "original": {
