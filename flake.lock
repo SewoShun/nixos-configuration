@@ -72,11 +72,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793824312,
-        "narHash": "sha256-ad8cZ+XOd4Sg2bSiSlI8g8lf536ycMki8DpqtKOdOQI=",
+        "lastModified": 1793888756,
+        "narHash": "sha256-uktDUhX7mtE1HFV79D3Du3rX6xuOH3mDgmf+RE4AzkI=",
         "owner": "patrickjaja",
         "repo": "claude-desktop-extra",
-        "rev": "4de5c260727b9c38fc9b7b7366a427fec35ab56f",
+        "rev": "78824abdb639c1c7598dfbabd2b5c4ff9e0e5fcc",
         "type": "github"
       },
       "original": {
@@ -846,11 +846,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793781856,
-        "narHash": "sha256-5c93tSlnE1VVunrw3/Q75EayZLkMQmoUcNZv/1fXWKU=",
+        "lastModified": 1793879729,
+        "narHash": "sha256-ZoqGR29kJSlqsgHyMKWjv3zEi6hrxDn+v5nwYntle+w=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "3c9750e20fd25605fbd2f7a71253997cc45838c5",
+        "rev": "9107affa07d1213f0e733ba62235bf23453cfb98",
         "type": "github"
       },
       "original": {
