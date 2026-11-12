@@ -64,6 +64,5 @@ delib.module {
         pango
       ];
     })
-    inputs.basalt-launcher.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

@@ -24,26 +24,6 @@
         "type": "github"
       }
     },
-    "basalt-launcher": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1789120902,
-        "narHash": "sha256-vsJJJHuLfC7S6bl/td7V+NXYTvSGR395eo42gKv+DcI=",
-        "owner": "MegalithOfficial",
-        "repo": "basalt-launcher",
-        "rev": "36b4f165e0bd7a11eec5a6da5d156d5661f8b11a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MegalithOfficial",
-        "repo": "basalt-launcher",
-        "type": "github"
-      }
-    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -600,7 +580,6 @@
     },
     "root": {
       "inputs": {
-        "basalt-launcher": "basalt-launcher",
         "catppuccin": "catppuccin",
         "claude-desktop": "claude-desktop",
         "denix": "denix",
