@@ -1,11 +1,16 @@
-{ delib, pkgs, ... }:
+{
+  delib,
+  pkgs,
+  homeConfig,
+  ...
+}:
 delib.module {
   name = "features.cli";
 
   options = delib.singleEnableOption false;
 
   myconfig.ifEnabled = {
-    user.defaultUserShell = pkgs.fish;
+    user.defaultUserShell = homeConfig.programs.nushell.package;
 
     services.pueue.enable = true;
 
@@ -20,6 +25,7 @@ delib.module {
       git.enable = true;
       helix.enable = true;
       jujutsu.enable = true;
+      nushell.enable = true;
       ripgrep.enable = true;
       skim.enable = true;
       starship.enable = true;

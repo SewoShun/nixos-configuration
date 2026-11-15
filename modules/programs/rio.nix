@@ -1,4 +1,9 @@
-{ delib, ... }:
+{
+  delib,
+  lib,
+  homeConfig,
+  ...
+}:
 delib.module {
   name = "programs.rio";
 
@@ -12,6 +17,7 @@ delib.module {
         size = 16;
       };
       hide-mouse-cursor-when-typing = true;
+      shell.program = lib.getExe homeConfig.programs.nushell.package;
       window.decorations = "Disabled";
     };
   };
