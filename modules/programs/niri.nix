@@ -28,7 +28,7 @@ delib.module {
         settings =
           let
             zen-browser = lib.getExe homeConfig.programs.zen-browser.package;
-            wezterm = lib.getExe homeConfig.programs.wezterm.package;
+            rio = lib.getExe homeConfig.programs.rio.package;
             anyrun = lib.getExe homeConfig.programs.anyrun.package;
             wleave = lib.getExe homeConfig.programs.wleave.package;
             osd = lib.getExe (
@@ -67,7 +67,7 @@ delib.module {
             inherit outputs;
 
             binds = with homeConfig.lib.niri.actions; {
-              "Mod+Return".action = spawn wezterm;
+              "Mod+Return".action = spawn rio;
               "Mod+b".action = spawn zen-browser;
               "Mod+d".action = spawn anyrun;
               "Mod+Shift+p".action = spawn wleave;

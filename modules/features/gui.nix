@@ -31,6 +31,7 @@ delib.module {
       niri.enable = true;
       steam.enable = true;
       swaylock.enable = true;
+      rio.enable = true;
       wezterm.enable = true;
       wleave.enable = true;
       zed-editor.enable = true;
