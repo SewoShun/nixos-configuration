@@ -23,6 +23,7 @@ delib.module {
           user = "sewo";
           command = "${lib.getExe pkgs.tuigreet} --time --cmd niri-session";
         };
+        useTextGreeter = cfg.greeter == "tuigreet";
       };
 
       # programs.regreet sets services.greetd.settings.default_session.command
