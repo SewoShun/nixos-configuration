@@ -51,6 +51,7 @@ delib.module {
     ];
 
     programs = {
+      carapace.enable = true;
       bottom.enable = true;
       docker-cli.enable = true;
     };
