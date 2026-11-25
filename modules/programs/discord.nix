@@ -1,8 +1,16 @@
-{ delib, ... }:
-delib.module {
-  name = "programs.discord";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.programs.discord;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.discord.enable = lib.mkEnableOption "discord";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled.programs.discord.enable = true;
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.programs.discord.enable = true;
+  };
 }

@@ -1,13 +1,21 @@
-{ delib, ... }:
-delib.module {
-  name = "programs.yazi";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.programs.yazi;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.yazi.enable = lib.mkEnableOption "yazi";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    programs.yazi.enable = true;
 
-  nixos.ifEnabled.programs.yazi.enable = true;
-
-  home.ifEnabled.programs.yazi = {
-    enable = true;
-    shellWrapperName = "yy";
+    home-manager.users.${username}.programs.yazi = {
+      enable = true;
+      shellWrapperName = "yy";
+    };
   };
 }

@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "hardware.cpu.amd";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.cpu.amd;
+in
+{
+  options.my.hardware.cpu.amd.enable = lib.mkEnableOption "amd";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.hardware.cpu.amd.updateMicrocode = true;
+  config = lib.mkIf cfg.enable {
+    hardware.cpu.amd.updateMicrocode = true;
+  };
 }

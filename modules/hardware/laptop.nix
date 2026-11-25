@@ -1,20 +1,23 @@
-{ delib, ... }:
-delib.module {
-  name = "hardware.laptop";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.laptop;
+in
+{
+  options.my.hardware.laptop.enable = lib.mkEnableOption "laptop";
 
-  options = delib.singleEnableOption false;
-
-  myconfig.ifEnabled =
-    { myconfig, ... }:
-    {
+  config = lib.mkIf cfg.enable {
+    my = {
       services = {
-        swayidle.enable = myconfig.programs.niri.enable && myconfig.programs.swaylock.enable;
+        swayidle.enable = config.my.programs.niri.enable && config.my.programs.swaylock.enable;
         tlp.enable = true;
         upower.enable = true;
       };
     };
 
-  nixos.ifEnabled = {
     services = {
       logind.settings.Login = {
         HandleLidSwitch = "suspend-then-hibernate";

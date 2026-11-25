@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "services.upower";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.upower;
+in
+{
+  options.my.services.upower.enable = lib.mkEnableOption "upower";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.upower.enable = true;
+  config = lib.mkIf cfg.enable {
+    services.upower.enable = true;
+  };
 }

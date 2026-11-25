@@ -1,20 +1,30 @@
-{ delib, inputs, ... }:
-delib.module {
-  name = "services.xremap";
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  cfg = config.my.services.xremap;
+in
+{
+  imports = [
+    inputs.xremap.nixosModules.default
+  ];
 
-  options = delib.singleEnableOption false;
+  options.my.services.xremap.enable = lib.mkEnableOption "xremap";
 
-  nixos.always.imports = [ inputs.xremap.nixosModules.default ];
-
-  nixos.ifEnabled.services.xremap = {
-    enable = true;
-    config.modmap = [
-      {
-        name = "Replace CapsLock to LeftControll";
-        remap = {
-          "CapsLock" = "Ctrl_L";
-        };
-      }
-    ];
+  config = lib.mkIf cfg.enable {
+    services.xremap = {
+      enable = true;
+      config.modmap = [
+        {
+          name = "Replace CapsLock to LeftControll";
+          remap = {
+            "CapsLock" = "Ctrl_L";
+          };
+        }
+      ];
+    };
   };
 }

@@ -1,22 +1,24 @@
 {
-  delib,
-  pkgs,
+  config,
   lib,
+  pkgs,
   ...
 }:
-delib.module {
-  name = "services.fcitx5";
-
-  options =
-    with delib;
-    moduleOptions {
-      enable = boolOption false;
-      skk.enable = boolOption true;
+let
+  cfg = config.my.services.fcitx5;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.services.fcitx5 = {
+    enable = lib.mkEnableOption "fcitx5";
+    skk.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
     };
+  };
 
-  home.ifEnabled =
-    { cfg, ... }:
-    {
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username} = {
       i18n.inputMethod = {
         enable = true;
         type = "fcitx5";
@@ -72,4 +74,5 @@ delib.module {
         '';
       };
     };
+  };
 }

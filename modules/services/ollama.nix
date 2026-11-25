@@ -1,8 +1,16 @@
-{ delib, ... }:
-delib.module {
-  name = "services.ollama";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.ollama;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.services.ollama.enable = lib.mkEnableOption "ollama";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled.services.ollama.enable = true;
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.services.ollama.enable = true;
+  };
 }

@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "boot.zswap";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.boot.zswap;
+in
+{
+  options.my.boot.zswap.enable = lib.mkEnableOption "zswap";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.boot.zswap.enable = true;
+  config = lib.mkIf cfg.enable {
+    boot.zswap.enable = true;
+  };
 }

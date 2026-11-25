@@ -1,11 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "nixpkgs";
-
-  nixos.always.nixpkgs.config = {
+{
+  config,
+  ...
+}:
+let
+  inherit (config.my.constants) username;
+in
+{
+  nixpkgs.config = {
     allowUnfree = true;
     nvidia.acceptLicense = true;
   };
 
-  home.always.nixpkgs.config.allowUnfree = true;
+  home-manager.users.${username}.nixpkgs.config.allowUnfree = true;
 }

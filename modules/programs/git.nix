@@ -1,16 +1,24 @@
-{ delib, ... }:
-delib.module {
-  name = "programs.git";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.programs.git;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.git.enable = lib.mkEnableOption "git";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    programs.git.enable = true;
 
-  nixos.ifEnabled.programs.git.enable = true;
-
-  home.ifEnabled.programs.git = {
-    enable = true;
-    settings.user = {
-      email = "93058265+SewoShun@users.noreply.github.com";
-      name = "SewoShun";
+    home-manager.users.${username}.programs.git = {
+      enable = true;
+      settings.user = {
+        email = "93058265+SewoShun@users.noreply.github.com";
+        name = "SewoShun";
+      };
     };
   };
 }

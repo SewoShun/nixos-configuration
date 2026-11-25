@@ -1,16 +1,23 @@
-{ delib, ... }:
-delib.module {
-  name = "services.pipewire";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.pipewire;
+in
+{
+  options.my.services.pipewire.enable = lib.mkEnableOption "pipewire";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.pipewire = {
-    enable = true;
-    alsa = {
+  config = lib.mkIf cfg.enable {
+    services.pipewire = {
       enable = true;
-      support32Bit = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
+      pulse.enable = true;
     };
-    jack.enable = true;
-    pulse.enable = true;
   };
 }

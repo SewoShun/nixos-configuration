@@ -1,10 +1,15 @@
-{ delib, config, ... }:
-delib.module {
-  name = "services.nordvpn";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.nordvpn;
+in
+{
+  options.my.services.nordvpn.enable = lib.mkEnableOption "nordvpn";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled = {
+  config = lib.mkIf cfg.enable {
     networking = {
       wg-quick.interfaces.nordvpn = {
         autostart = true;

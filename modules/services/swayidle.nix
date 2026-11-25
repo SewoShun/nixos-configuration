@@ -1,43 +1,47 @@
 {
-  delib,
+  config,
   lib,
   pkgs,
-  homeConfig,
   ...
 }:
-delib.module {
-  name = "services.swayidle";
+let
+  cfg = config.my.services.swayidle;
+  inherit (config.my.constants) username;
+  homeConfig = config.home-manager.users.${username};
+in
+{
+  options.my.services.swayidle.enable = lib.mkEnableOption "swayidle";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled.services.swayidle =
-    let
-      bctl = "${lib.getExe pkgs.brightnessctl}";
-      niri = "${lib.getExe homeConfig.programs.niri.package}";
-      lock = "${lib.getExe homeConfig.programs.swaylock.package} -f";
-    in
-    {
-      enable = true;
-      timeouts = [
-        {
-          timeout = 60;
-          command = "${bctl} -s; ${bctl} set 0";
-          resumeCommand = "${bctl} -r";
-        }
-        {
-          timeout = 120;
-          command = "${lock}";
-        }
-        {
-          timeout = 180;
-          command = "${niri} msg action power-off-monitors";
-          resumeCommand = "${niri} msg action power-on-monitors";
-        }
-        {
-          timeout = 1800;
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-        }
-      ];
-      events.before-sleep = "${lock}";
-    };
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.services.swayidle =
+      let
+        bctl = "${lib.getExe pkgs.brightnessctl}";
+        niri = "${lib.getExe homeConfig.programs.niri.package}";
+        lock = "${lib.getExe homeConfig.programs.swaylock.package} -f";
+      in
+      {
+        enable = true;
+        timeouts = [
+          {
+            timeout = 60;
+            command = "${bctl} -s; ${bctl} set 0";
+            resumeCommand = "${bctl} -r";
+          }
+          {
+            timeout = 120;
+            command = "${lock}";
+          }
+          {
+            timeout = 180;
+            command = "${niri} msg action power-off-monitors";
+            resumeCommand = "${niri} msg action power-on-monitors";
+          }
+          {
+            timeout = 1800;
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+          }
+        ];
+        events.before-sleep = "${lock}";
+      };
+  };
 }

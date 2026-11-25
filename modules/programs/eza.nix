@@ -1,15 +1,24 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "programs.eza";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.programs.eza;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.eza.enable = lib.mkEnableOption "eza";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    environment.defaultPackages = [ pkgs.eza ];
 
-  nixos.ifEnabled.environment.defaultPackages = [ pkgs.eza ];
-
-  home.ifEnabled.programs.eza = {
-    enable = true;
-    icons = "auto";
-    colors = "auto";
-    git = true;
+    home-manager.users.${username}.programs.eza = {
+      enable = true;
+      icons = "auto";
+      colors = "auto";
+      git = true;
+    };
   };
 }

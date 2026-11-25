@@ -1,19 +1,25 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "programs.swaylock";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.programs.swaylock;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.swaylock.enable = lib.mkEnableOption "swaylock";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    # swaylock authenticates via PAM; without fprintd so that the password works immediately
+    security.pam.services.swaylock.fprintAuth = false;
 
-  # swaylock authenticates via PAM; without fprintd so that the password works immediately
-  nixos.ifEnabled.security.pam.services.swaylock.fprintAuth = false;
-
-  home.ifEnabled =
-    { myconfig, ... }:
-    {
+    home-manager.users.${username} = {
       programs.swaylock = {
         enable = true;
         settings = {
-          image = myconfig.constants.wallpaper;
+          image = config.my.constants.wallpaper;
           scaling = "fill";
           clock = true;
           datestr = "%Y/%m/%d";
@@ -23,4 +29,5 @@ delib.module {
         package = pkgs.swaylock-effects;
       };
     };
+  };
 }

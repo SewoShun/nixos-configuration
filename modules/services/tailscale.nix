@@ -1,12 +1,19 @@
-{ delib, config, ... }:
-delib.module {
-  name = "services.tailscale";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.tailscale;
+in
+{
+  options.my.services.tailscale.enable = lib.mkEnableOption "tailscale";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.tailscale = {
-    enable = true;
-    authKeyFile = config.age.secrets.tailscale-auth-key.path;
-    extraUpFlags = [ "--ssh" ];
+  config = lib.mkIf cfg.enable {
+    services.tailscale = {
+      enable = true;
+      authKeyFile = config.age.secrets.tailscale-auth-key.path;
+      extraUpFlags = [ "--ssh" ];
+    };
   };
 }

@@ -1,10 +1,19 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "programs.delta";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.programs.delta;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.delta.enable = lib.mkEnableOption "delta";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    environment.defaultPackages = with pkgs; [ delta ];
 
-  nixos.ifEnabled.environment.defaultPackages = with pkgs; [ delta ];
-
-  home.ifEnabled.programs.delta.enable = true;
+    home-manager.users.${username}.programs.delta.enable = true;
+  };
 }

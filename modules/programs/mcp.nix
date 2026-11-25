@@ -1,21 +1,26 @@
 {
-  delib,
+  config,
+  lib,
   pkgs,
   ...
 }:
-delib.module {
-  name = "programs.mcp";
+let
+  cfg = config.my.programs.mcp;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.mcp.enable = lib.mkEnableOption "mcp";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      mcp-server-filesystem
-    ];
-    programs.mcp = {
-      enable = true;
-      servers = {
-        filesystem.command = pkgs.lib.getExe pkgs.mcp-server-filesystem;
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username} = {
+      home.packages = with pkgs; [
+        mcp-server-filesystem
+      ];
+      programs.mcp = {
+        enable = true;
+        servers = {
+          filesystem.command = pkgs.lib.getExe pkgs.mcp-server-filesystem;
+        };
       };
     };
   };

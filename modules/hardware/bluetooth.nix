@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "hardware.bluetooth";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.bluetooth;
+in
+{
+  options.my.hardware.bluetooth.enable = lib.mkEnableOption "bluetooth";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.hardware.bluetooth.enable = true;
+  config = lib.mkIf cfg.enable {
+    hardware.bluetooth.enable = true;
+  };
 }

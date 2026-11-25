@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "services.lemurs";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.lemurs;
+in
+{
+  options.my.services.lemurs.enable = lib.mkEnableOption "lemurs";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.displayManager.lemurs.enable = true;
+  config = lib.mkIf cfg.enable {
+    services.displayManager.lemurs.enable = true;
+  };
 }

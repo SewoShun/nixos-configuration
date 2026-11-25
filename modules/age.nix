@@ -1,30 +1,24 @@
+{ config, inputs, ... }:
+let
+  inherit (config.my.constants) username;
+  homeConfig = config.home-manager.users.${username};
+in
 {
-  delib,
-  inputs,
-  config,
-  homeConfig,
-  ...
-}:
-delib.module {
-  name = "age";
+  imports = [ inputs.ragenix.nixosModules.default ];
 
-  nixos.always = {
-    imports = [ inputs.ragenix.nixosModules.default ];
-
-    age.secrets = {
-      access-tokens.file = ../secrets/access-tokens.age;
-      cachix-auth-token.file = ../secrets/cachix-auth-token.age;
-      password.file = ../secrets/password.age;
-      nordvpn-wg-key.file = ../secrets/nordvpn-wg-key.age;
-      tailscale-auth-key.file = ../secrets/tailscale-auth-key.age;
-    };
-
-    nix.extraOptions = ''
-      !include ${config.age.secrets.access-tokens.path}
-    '';
+  age.secrets = {
+    access-tokens.file = ../secrets/access-tokens.age;
+    cachix-auth-token.file = ../secrets/cachix-auth-token.age;
+    password.file = ../secrets/password.age;
+    nordvpn-wg-key.file = ../secrets/nordvpn-wg-key.age;
+    tailscale-auth-key.file = ../secrets/tailscale-auth-key.age;
   };
 
-  home.always = {
+  nix.extraOptions = ''
+    !include ${config.age.secrets.access-tokens.path}
+  '';
+
+  home-manager.users.${username} = {
     imports = [ inputs.ragenix.homeManagerModules.default ];
 
     age.secrets.access-tokens-user = {

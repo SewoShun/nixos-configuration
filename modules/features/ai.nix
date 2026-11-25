@@ -1,10 +1,13 @@
 {
-  delib,
+  config,
+  lib,
   pkgs,
   inputs,
   ...
 }:
 let
+  cfg = config.my.features.ai;
+  inherit (config.my.constants) username;
   system = pkgs.stdenv.hostPlatform.system;
 
   claudeDesktopRaw = inputs.claude-desktop.packages.${system}.default.override {
@@ -20,31 +23,31 @@ let
     '';
   };
 in
-delib.module {
-  name = "features.ai";
+{
+  options.my.features.ai.enable = lib.mkEnableOption "ai";
 
-  options = delib.singleEnableOption false;
-
-  myconfig.ifEnabled = { myconfig, ... }: {
-    programs = {
-      mcp.enable = true;
-      claude-code.enable = myconfig.features.cli.enable;
+  config = lib.mkIf cfg.enable {
+    my = {
+      programs = {
+        mcp.enable = true;
+        claude-code.enable = config.my.features.cli.enable;
+      };
+      services.ollama.enable = config.my.features.cli.enable;
     };
-    services.ollama.enable = myconfig.features.cli.enable;
-  };
 
-  home.ifEnabled = { myconfig, ... }: {
-    home.packages =
-      with pkgs;
-      [ sentrux ]
-      ++ (
-        if myconfig.features.gui.enable then
-          [
-            claudeDesktop
-            libGL
-          ]
-        else
-          [ ]
-      );
+    home-manager.users.${username} = {
+      home.packages =
+        with pkgs;
+        [ sentrux ]
+        ++ (
+          if config.my.features.gui.enable then
+            [
+              claudeDesktop
+              libGL
+            ]
+          else
+            [ ]
+        );
+    };
   };
 }

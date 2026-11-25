@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "hardware.ssd";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.ssd;
+in
+{
+  options.my.hardware.ssd.enable = lib.mkEnableOption "ssd";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.fstrim.enable = true;
+  config = lib.mkIf cfg.enable {
+    services.fstrim.enable = true;
+  };
 }

@@ -1,10 +1,15 @@
-{ delib, config, ... }:
-delib.module {
-  name = "hardware.gpu.nvidia";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.gpu.nvidia;
+in
+{
+  options.my.hardware.gpu.nvidia.enable = lib.mkEnableOption "nvidia";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled = {
+  config = lib.mkIf cfg.enable {
     boot.kernelModules = [
       "nvidia"
       "nvidia_modeset"

@@ -1,5 +1,3 @@
-{ delib, inputs, ... }:
-delib.overlayModule {
-  name = "helix";
-  # overlay = inputs.helix.overlays.helix;
+{
+  # nixpkgs.overlays = [ inputs.helix.overlays.helix ];
 }

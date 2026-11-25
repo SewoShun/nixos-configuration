@@ -1,8 +1,16 @@
-{ delib, ... }:
-delib.module {
-  name = "services.pueue";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.pueue;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.services.pueue.enable = lib.mkEnableOption "pueue";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled.services.pueue.enable = true;
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.services.pueue.enable = true;
+  };
 }

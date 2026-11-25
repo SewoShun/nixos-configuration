@@ -1,10 +1,19 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "programs.fd";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.programs.fd;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.fd.enable = lib.mkEnableOption "fd";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    environment.defaultPackages = with pkgs; [ fd ];
 
-  nixos.ifEnabled.environment.defaultPackages = with pkgs; [ fd ];
-
-  home.ifEnabled.programs.fd.enable = true;
+    home-manager.users.${username}.programs.fd.enable = true;
+  };
 }

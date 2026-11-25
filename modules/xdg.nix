@@ -1,15 +1,21 @@
-{ delib, ... }:
-delib.module {
-  name = "xdg-portal";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.xdg-portal;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.xdg-portal.enable = lib.mkEnableOption "xdg-portal";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled = {
+  config = lib.mkIf cfg.enable {
     environment.pathsToLink = [
       "/share/xdg-desktop-portal"
       "/share/applications"
     ];
-  };
 
-  home.ifEnabled.xdg.portal.enable = true;
+    home-manager.users.${username}.xdg.portal.enable = true;
+  };
 }

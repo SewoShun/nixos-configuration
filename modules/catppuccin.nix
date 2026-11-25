@@ -1,38 +1,48 @@
-{ delib, inputs, ... }:
-delib.module {
-  name = "catppuccin";
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  cfg = config.my.catppuccin;
+  inherit (config.my.constants) username;
+in
+{
+  imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
-  options =
-    with delib;
-    moduleOptions {
-      enable = boolOption false;
-      flavor = enumOption [ "latte" "frappe" "macchiato" "mocha" ] "mocha";
+  options.my.catppuccin = {
+    enable = lib.mkEnableOption "catppuccin";
+    flavor = lib.mkOption {
+      type = lib.types.enum [
+        "latte"
+        "frappe"
+        "macchiato"
+        "mocha"
+      ];
+      default = "mocha";
     };
+  };
 
-  nixos.always.imports = [ inputs.catppuccin.nixosModules.catppuccin ];
-
-  nixos.ifEnabled =
-    { cfg, ... }:
+  config = lib.mkMerge [
     {
+      home-manager.users.${username}.imports = [ inputs.catppuccin.homeModules.catppuccin ];
+    }
+    (lib.mkIf cfg.enable {
       catppuccin = {
         enable = true;
         autoEnable = true;
         inherit (cfg) flavor;
         cache.enable = true;
       };
-    };
 
-  home.always.imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
-  home.ifEnabled =
-    { cfg, ... }:
-    {
-      catppuccin = {
+      home-manager.users.${username}.catppuccin = {
         enable = true;
         autoEnable = true;
         inherit (cfg) flavor;
         cursors.enable = true;
         cache.enable = true;
       };
-    };
+    })
+  ];
 }

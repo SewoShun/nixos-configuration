@@ -1,8 +1,15 @@
-{ delib, ... }:
-delib.module {
-  name = "hardware.cpu.intel";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.hardware.cpu.intel;
+in
+{
+  options.my.hardware.cpu.intel.enable = lib.mkEnableOption "intel";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.hardware.cpu.intel.updateMicrocode = true;
+  config = lib.mkIf cfg.enable {
+    hardware.cpu.intel.updateMicrocode = true;
+  };
 }

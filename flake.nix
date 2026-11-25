@@ -3,9 +3,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    denix.url = "github:yunfachi/denix";
-    denix.inputs.nixpkgs.follows = "nixpkgs";
-    denix.inputs.home-manager.follows = "home-manager";
 
     catppuccin.url = "github:catppuccin/nix";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,36 +29,27 @@
   };
 
   outputs =
-    { denix, ... }@inputs:
+    { nixpkgs, home-manager, ... }@inputs:
     let
-      mkConfigurations =
-        moduleSystem:
-        denix.lib.configurations {
-          inherit moduleSystem;
-          homeManagerUser = "sewo";
+      inherit (nixpkgs) lib;
 
-          paths = [
-            ./hosts
-            ./modules
-            ./overlays
-            ./rises
-          ];
+      nixFilesIn = dir: lib.filter (lib.hasSuffix ".nix") (lib.filesystem.listFilesRecursive dir);
 
-          extensions = with denix.lib.extensions; [
-            args
-            (base.withConfig {
-              args.enable = true;
-            })
-            overlays
-          ];
-
-          specialArgs = {
-            inherit inputs moduleSystem;
-          };
+      mkHost =
+        hostName:
+        lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules =
+            nixFilesIn ./hosts/${hostName}
+            ++ nixFilesIn ./modules
+            ++ nixFilesIn ./overlays
+            ++ [ home-manager.nixosModules.home-manager ];
         };
     in
     {
-      nixosConfigurations = mkConfigurations "nixos";
-      homeConfigurations = mkConfigurations "home";
+      nixosConfigurations = lib.genAttrs [
+        "desktop"
+        "thinkpad-e14-gen7"
+      ] mkHost;
     };
 }

@@ -1,22 +1,22 @@
-{ delib, ... }:
-delib.module {
-  name = "swap";
-
-  options =
-    with delib;
-    moduleOptions {
-      enable = boolOption false;
-      devices = listOption [
+{ config, lib, ... }:
+let
+  cfg = config.my.swap;
+in
+{
+  options.my.swap = {
+    enable = lib.mkEnableOption "swap";
+    devices = lib.mkOption {
+      type = lib.types.listOf lib.types.attrs;
+      default = [
         {
           device = "/swapfile";
           size = 32 * 1024;
         }
       ];
     };
+  };
 
-  nixos.ifEnabled =
-    { cfg, ... }:
-    {
-      swapDevices = cfg.devices;
-    };
+  config = lib.mkIf cfg.enable {
+    swapDevices = cfg.devices;
+  };
 }

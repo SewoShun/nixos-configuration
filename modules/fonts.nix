@@ -1,9 +1,11 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "fonts";
+{
+  pkgs,
+  ...
+}:
+{
+  fonts.fontconfig.enable = true;
 
-  nixos.always.fonts.fontconfig.enable = true;
-  nixos.always.fonts.packages = with pkgs; [
+  fonts.packages = with pkgs; [
     dejavu_fonts
     liberation_ttf
     noto-fonts

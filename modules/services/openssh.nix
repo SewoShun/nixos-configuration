@@ -1,14 +1,21 @@
-{ delib, ... }:
-delib.module {
-  name = "services.openssh";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.openssh;
+in
+{
+  options.my.services.openssh.enable = lib.mkEnableOption "openssh";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
+  config = lib.mkIf cfg.enable {
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
     };
   };
 }

@@ -1,8 +1,16 @@
-{ delib, ... }:
-delib.module {
-  name = "services.dunst";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.services.dunst;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.services.dunst.enable = lib.mkEnableOption "dunst";
 
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled.services.dunst.enable = true;
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.services.dunst.enable = true;
+  };
 }

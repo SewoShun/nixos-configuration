@@ -1,20 +1,34 @@
-{ delib, inputs, ... }:
-delib.module {
-  name = "programs.nix-index";
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  cfg = config.my.programs.nix-index;
+  inherit (config.my.constants) username;
+in
+{
+  imports = [
+    inputs.nix-index-database.nixosModules.default
+  ];
 
-  options = delib.singleEnableOption false;
+  options.my.programs.nix-index.enable = lib.mkEnableOption "nix-index";
 
-  nixos.always.imports = [ inputs.nix-index-database.nixosModules.default ];
+  config = lib.mkMerge [
+    {
+      home-manager.users.${username}.imports = [ inputs.nix-index-database.homeModules.default ];
+    }
+    (lib.mkIf cfg.enable {
+      programs = {
+        nix-index.enable = true;
+        nix-index-database.comma.enable = true;
+      };
 
-  nixos.ifEnabled.programs = {
-    nix-index.enable = true;
-    nix-index-database.comma.enable = true;
-  };
-
-  home.always.imports = [ inputs.nix-index-database.homeModules.default ];
-
-  home.ifEnabled.programs = {
-    nix-index.enable = true;
-    nix-index-database.comma.enable = true;
-  };
+      home-manager.users.${username}.programs = {
+        nix-index.enable = true;
+        nix-index-database.comma.enable = true;
+      };
+    })
+  ];
 }

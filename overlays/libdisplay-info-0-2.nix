@@ -1,6 +1,7 @@
-{ delib, ... }:
-delib.overlayModule {
-  name = "libdisplay-info-0-2";
+{ config, ... }:
+let
+  inherit (config.my.constants) username;
+
   # nixpkgs removed `libdisplay-info_0_2` on 2026-08-04 (see pkgs/top-level/aliases.nix),
   # but niri-flake's niri-stable/niri-unstable packages still hard-require version 0.2.0
   # (`assert libdisplay-info_0_2.version == "0.2.0"`). Restore it until niri-flake adapts.
@@ -16,4 +17,8 @@ delib.overlayModule {
       };
     });
   };
+in
+{
+  nixpkgs.overlays = [ overlay ];
+  home-manager.users.${username}.nixpkgs.overlays = [ overlay ];
 }

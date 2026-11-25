@@ -1,10 +1,18 @@
-{ delib, ... }:
-delib.module {
-  name = "programs.zoxide";
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.my.programs.zoxide;
+  inherit (config.my.constants) username;
+in
+{
+  options.my.programs.zoxide.enable = lib.mkEnableOption "zoxide";
 
-  options = delib.singleEnableOption false;
+  config = lib.mkIf cfg.enable {
+    programs.zoxide.enable = true;
 
-  nixos.ifEnabled.programs.zoxide.enable = true;
-
-  home.ifEnabled.programs.zoxide.enable = true;
+    home-manager.users.${username}.programs.zoxide.enable = true;
+  };
 }

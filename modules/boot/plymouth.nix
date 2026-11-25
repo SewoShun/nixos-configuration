@@ -1,10 +1,16 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "boot.plymouth";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.boot.plymouth;
+in
+{
+  options.my.boot.plymouth.enable = lib.mkEnableOption "plymouth";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled = {
+  config = lib.mkIf cfg.enable {
     boot = {
       plymouth = {
         enable = true;

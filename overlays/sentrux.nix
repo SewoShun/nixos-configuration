@@ -1,6 +1,7 @@
-{ delib, ... }:
-delib.overlayModule {
-  name = "sentrux";
+{ config, ... }:
+let
+  inherit (config.my.constants) username;
+
   # Vendored from github:SewoShun/sentrux-nix (no longer used as a flake input).
   # sentrux does not build from source; it downloads the prebuilt release binary
   # from sentrux/sentrux's GitHub Releases (x86_64-linux only) and patches it for NixOS.
@@ -75,4 +76,8 @@ delib.overlayModule {
         };
       };
   };
+in
+{
+  nixpkgs.overlays = [ overlay ];
+  home-manager.users.${username}.nixpkgs.overlays = [ overlay ];
 }

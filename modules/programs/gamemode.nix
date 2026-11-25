@@ -1,15 +1,23 @@
-{ delib, pkgs, ... }:
-delib.module {
-  name = "programs.gamemode";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.my.programs.gamemode;
+in
+{
+  options.my.programs.gamemode.enable = lib.mkEnableOption "gamemode";
 
-  options = delib.singleEnableOption false;
-
-  nixos.ifEnabled.programs.gamemode = {
-    enable = true;
-    settings = {
-      custom = {
-        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+  config = lib.mkIf cfg.enable {
+    programs.gamemode = {
+      enable = true;
+      settings = {
+        custom = {
+          start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+          end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+        };
       };
     };
   };
