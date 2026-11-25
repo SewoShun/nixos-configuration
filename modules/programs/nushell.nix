@@ -23,16 +23,12 @@ in
       settings = {
         show_banner = false;
       };
-      shellAliases =
-        let
-          rice = "catppuccin-mocha";
-        in
-        {
-          nh-osl = "nh os switch ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}-${rice}";
-          nh-obl = "nh os boot ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}-${rice}";
-          nh-osr = "nh os switch github:SewoShun/nixos-configuration -H ${hostName}-${rice}";
-          nh-obr = "nh os boot github:SewoShun/nixos-configuration -H ${hostName}-${rice}";
-        };
+      shellAliases = {
+        nh-osl = "nh os switch ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}";
+        nh-obl = "nh os boot ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}";
+        nh-osr = "nh os switch github:SewoShun/nixos-configuration -H ${hostName}";
+        nh-obr = "nh os boot github:SewoShun/nixos-configuration -H ${hostName}";
+      };
     };
   };
 }

@@ -21,28 +21,24 @@ in
         functions = {
           fish_greeting = "${lib.getExe pkgs.fastfetch}";
         };
-        shellAbbrs =
-          let
-            rice = "catppuccin-mocha";
-          in
-          {
-            osl = {
-              command = "nh";
-              expansion = "os switch ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}-${rice}";
-            };
-            obl = {
-              command = "nh";
-              expansion = "os boot ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}-${rice}";
-            };
-            osr = {
-              command = "nh";
-              expansion = "os switch github:SewoShun/nixos-configuration -H ${hostName}-${rice}";
-            };
-            obr = {
-              command = "nh";
-              expansion = "os boot github:SewoShun/nixos-configuration -H ${hostName}-${rice}";
-            };
+        shellAbbrs = {
+          osl = {
+            command = "nh";
+            expansion = "os switch ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}";
           };
+          obl = {
+            command = "nh";
+            expansion = "os boot ~/ghq/github.com/SewoShun/nixos-configuration -H ${hostName}";
+          };
+          osr = {
+            command = "nh";
+            expansion = "os switch github:SewoShun/nixos-configuration -H ${hostName}";
+          };
+          obr = {
+            command = "nh";
+            expansion = "os boot github:SewoShun/nixos-configuration -H ${hostName}";
+          };
+        };
       };
 
       xdg.configFile."fish/completions/nix.fish" = {
