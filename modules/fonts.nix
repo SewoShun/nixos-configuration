@@ -15,5 +15,6 @@
     nerd-fonts.zed-mono
     nerd-fonts."m+"
     nerd-fonts.victor-mono
+    nerd-fonts.monaspace
   ];
 }

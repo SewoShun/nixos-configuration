@@ -16,8 +16,22 @@ in
       enable = true;
       settings = {
         fonts = {
-          family = "VictorMono Nerd Font";
+          family = "MonaspiceNe NF";
           size = 16;
+          features = [
+            "calt"
+            "-ss01"
+            "-ss02"
+            "-ss03"
+            "-ss04"
+            "-ss05"
+            "-ss06"
+            "-ss07"
+            "-ss08"
+            "-ss09"
+            "-ss10"
+            "-liga"
+          ];
         };
         hide-mouse-cursor-when-typing = true;
         shell.program = lib.getExe homeConfig.programs.nushell.package;
